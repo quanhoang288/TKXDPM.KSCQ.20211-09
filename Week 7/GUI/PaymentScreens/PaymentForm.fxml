@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="790.0" prefWidth="1278.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane prefHeight="790.0" prefWidth="1278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="678.0" minWidth="10.0" prefWidth="206.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1113.0" minWidth="10.0" prefWidth="1072.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane prefHeight="786.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <Label layoutX="43.0" layoutY="25.0" text="Ecobike" textAlignment="CENTER" textFill="#57e46e">
+                     <font>
+                        <Font name="Segoe UI" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="17.0" layoutY="117.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="245.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="385.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="View rental status">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1121.0" GridPane.columnIndex="1">
+               <children>
+                  <Button layoutX="456.0" layoutY="629.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24;" text="Submit" textFill="#1570d0" />
+                  <GridPane layoutX="81.0" layoutY="61.0" prefHeight="520.0" prefWidth="901.0" AnchorPane.topAnchor="61.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label prefHeight="91.0" prefWidth="460.0" text="Cardholder name">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="91.0" prefWidth="460.0" text="Card number" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="91.0" prefWidth="460.0" text="Issuing bank" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="91.0" prefWidth="460.0" text="Expiration date" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="91.0" prefWidth="460.0" text="Security code" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="87.0" prefWidth="449.0" text="Transaction description" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField prefHeight="50.0" prefWidth="411.0" GridPane.columnIndex="1" />
+                        <TextField prefHeight="50.0" prefWidth="448.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField prefHeight="50.0" prefWidth="448.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField prefHeight="50.0" prefWidth="448.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField prefHeight="50.0" prefWidth="448.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextArea prefHeight="200.0" prefWidth="444.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
