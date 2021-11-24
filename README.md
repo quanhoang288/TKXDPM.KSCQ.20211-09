@@ -31,3 +31,13 @@
 - Vũ Tấn Khang: Thiết kế giao diện cho màn hình Thanh toán, màn hình hiển thị kết quả giao dịch thanh toán
 - Rattanak Neariroth: Thiết kế giao diện cho màn hình Liệt kê danh sách các bãi xe, xem chi tiết bãi xe
 
+## Week 7 - Class design - Data model design
+### Tasks
+- Thiết kế chi tiết các lớp . Phát triển từ biểu đồ lớp thiết kế ở pha trước
+- Thiết kế các mô hình dữ liệu
+### Contributors
+- Hoàng Huy Quân: Thiết kế chi tiết các lớp liên quan đến Usecase trả xe , subsystem Interbank
+- Nguyễn Đức Thắng: Thiết kế chi tiết các lớp liên quan đến Usecase thuê xe 
+- Vũ Tấn Khang: Thiết kế chi tiết các lớp liên quan đến Usecase xem bãi xe , xem chi tiết xe
+- Rattanak Neariroth: Thiết kế mô hình dữ liệu logic , vật lý
+
