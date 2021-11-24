@@ -31,7 +31,7 @@
 - Vũ Tấn Khang: Thiết kế giao diện cho màn hình Thanh toán, màn hình hiển thị kết quả giao dịch thanh toán
 - Rattanak Neariroth: Thiết kế giao diện cho màn hình Liệt kê danh sách các bãi xe, xem chi tiết bãi xe
 
-## Week 7 - Class design - Data model design
+## Week 9 - Class design - Data model design
 ### Tasks
 - Thiết kế chi tiết các lớp . Phát triển từ biểu đồ lớp thiết kế ở pha trước
 - Thiết kế các mô hình dữ liệu
