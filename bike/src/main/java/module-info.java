@@ -1,12 +1,12 @@
-module com.example.bike {
+module eco.bike {
     requires javafx.controls;
     requires javafx.fxml;
-    requires junit;
+    requires java.sql;
+    requires org.mongodb.bson;
+    requires org.mongodb.driver.core;
+    requires org.mongodb.driver.sync.client;
 
 
-    opens com.example.bike to javafx.fxml;
-    exports com.example.bike.controller.authen;
-    exports com.example.bike.controller.payment;
-    exports com.example.bike.controller.views;
-    exports com.example.bike;
+    opens eco.bike to javafx.fxml;
+    exports eco.bike;
 }
