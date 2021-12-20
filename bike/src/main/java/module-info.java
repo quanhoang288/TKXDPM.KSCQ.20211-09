@@ -1,12 +1,10 @@
-module com.example.bike {
+module ecobike {
     requires javafx.controls;
     requires javafx.fxml;
-    requires junit;
+    requires java.sql;
 
+    opens ecobike.view to javafx.fxml;
+    opens ecobike.view.base to javafx.fxml;
 
-    opens com.example.bike to javafx.fxml;
-    exports com.example.bike.controller.authen;
-    exports com.example.bike.controller.payment;
-    exports com.example.bike.controller.views;
-    exports com.example.bike;
+    exports ecobike;
 }
