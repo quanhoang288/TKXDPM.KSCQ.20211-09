@@ -1,66 +1,38 @@
 package eco.bike.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Bike {
-    private int id;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "uuid2"
+    )
+    private String  id;
+    @Column(name = "type")
     private String type;
+    @Column(name = "licensePlate")
     private String licensePlate;
+    @Column(name = "batteryPercent")
     private String batteryPercent;
+    @Column(name = "value")
     private String value;
-    private int dockId;
+    @ManyToOne
+    @JoinColumn(name = "dockID")
+    private Dock dock;
+    @OneToMany(mappedBy = "bike")
+    private List<BikeRentalInfo> rentedSession;
 
-    public Bike(int id, String type, String licensePlate, String value, int dockId) {
-        this.id = id;
-        this.type = type;
-        this.licensePlate = licensePlate;
-        this.value = value;
-        this.dockId = dockId;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
-
-    public String getBatteryPercent() {
-        return batteryPercent;
-    }
-
-    public void setBatteryPercent(String batteryPercent) {
-        this.batteryPercent = batteryPercent;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public int getDockId() {
-        return dockId;
-    }
-
-    public void setDockId(int dockId) {
-        this.dockId = dockId;
-    }
 }

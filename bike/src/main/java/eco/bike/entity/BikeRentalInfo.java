@@ -1,48 +1,37 @@
 package eco.bike.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BikeRentalInfo {
 
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "uuid2"
+    )
+    private String id;
+    @Column(name = "startAt")
     private String startAt;
+    @Column(name = "endAt")
     private String endAt;
-    private int bikeId;
-    private int userId;
 
-    public BikeRentalInfo(String startAt, String endAt, int bikeId, int userId) {
-        this.startAt = startAt;
-        this.endAt = endAt;
-        this.bikeId = bikeId;
-        this.userId = userId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "bikeID")
+    private Bike bike;
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User user;
 
-    public String getStartAt() {
-        return startAt;
-    }
 
-    public void setStartAt(final String startAt) {
-        this.startAt = startAt;
-    }
 
-    public String getEndAt() {
-        return endAt;
-    }
-
-    public void setEndAt(final String endAt) {
-        this.endAt = endAt;
-    }
-
-    public int getBikeId() {
-        return bikeId;
-    }
-
-    public void setBikeId(int bikeId) {
-        this.bikeId = bikeId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }
