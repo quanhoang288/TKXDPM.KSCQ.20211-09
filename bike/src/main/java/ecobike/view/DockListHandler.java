@@ -1,0 +1,34 @@
+package ecobike.view;
+
+import ecobike.utils.Configs;
+import ecobike.view.base.BaseScreenHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class DockListHandler extends BaseScreenHandler {
+    private String[] dockList = {"Dock 1", "Dock 2", "Dock 3", "Dock 4", "Dock 5", "Dock 6"};
+
+    @FXML
+    private ListView dockListView;
+
+    public DockListHandler(Stage stage, String screenPath) throws IOException {
+        super(stage, screenPath);
+        this.initDockList();
+    }
+
+    private void initDockList() {
+        this.dockListView.getItems().addAll(dockList);
+    }
+
+    @FXML
+    public void viewDockDetail() throws IOException {
+        //TODO: initialize controller for dock detail handler
+        BaseScreenHandler dockDetailHandler = new ViewDockHandler(this.stage, Configs.DOCK_DETAIL_PATH);
+        dockDetailHandler.setPreviousScreen(this);
+        dockDetailHandler.setScreenTitle("Dock Detail Screen");
+        dockDetailHandler.show();
+    }
+}

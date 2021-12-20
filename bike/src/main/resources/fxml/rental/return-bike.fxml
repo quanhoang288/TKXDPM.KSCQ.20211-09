@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="678.0" minWidth="10.0" prefWidth="253.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1113.0" minWidth="10.0" prefWidth="1113.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <Label layoutX="65.0" layoutY="22.0" text="Ecobike" textAlignment="CENTER" textFill="#57e46e">
+                     <font>
+                        <Font name="Segoe UI" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Home" onMouseClicked="#redirectToHome">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="39.0" layoutY="249.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike" onMouseClicked="#redirectToRentBike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="42.0" layoutY="398.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike" onMouseClicked="#redirectToReturnBike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="42.0" layoutY="551.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="View rental status" onMouseClicked="#redirectToRentalInfo">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <TextField layoutX="51.0" layoutY="36.0" prefHeight="39.0" prefWidth="312.0" />
+                  <Button layoutX="391.0" layoutY="36.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="88.0" text="Search">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <ListView layoutX="51.0" layoutY="104.0" prefHeight="550.0" prefWidth="936.0" />
+                  <Button layoutX="458.0" layoutY="682.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Return bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="82.0" layoutY="139.0" prefHeight="36.0" prefWidth="874.0" style="-fx-background-color: #eeeeee;" text="Docking Station 1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="224.0" prefHeight="36.0" prefWidth="730.0" text="Docking Station 2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="539.0" prefHeight="36.0" prefWidth="730.0" text="Docking Station 6">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="459.0" prefHeight="36.0" prefWidth="730.0" text="Docking Station 5">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="379.0" prefHeight="36.0" prefWidth="730.0" text="Docking Station 4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="303.0" prefHeight="36.0" prefWidth="730.0" text="Docking Station 3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
