@@ -1,19 +1,18 @@
 package ecobike.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
+public class BikeRentalInfo {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -21,18 +20,17 @@ public class User {
             strategy = "uuid2"
     )
     private String id;
-    private String name;
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
-    private String province;
-    private String address;
-    @Column(name = "dateOfBirth")
-    private String dateOfBirth;
-    private String email;
-    private String password;
+    @Column(name = "startAt")
+    private String startAt;
+    @Column(name = "endAt")
+    private String endAt;
 
-    @OneToMany(mappedBy = "user")
-    private List<BikeRentalInfo> rentingHistory;
+    @ManyToOne
+    @JoinColumn(name = "bikeID")
+    private Bike bike;
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User user;
 
 
 
