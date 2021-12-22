@@ -41,6 +41,8 @@ public class InterbankSubsystemController {
         requestMap.put("version", VERSION);
         requestMap.put("transaction", transaction);
 
+        System.out.println(Configs.PROCESS_TRANSACTION_URL);
+        System.out.println(requestMap);
         String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
         MyMap response = null;
         try {
