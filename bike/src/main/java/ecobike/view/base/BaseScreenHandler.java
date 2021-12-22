@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 
+import ecobike.controller.ReturnBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.utils.Configs;
 import ecobike.view.BikeRentalInfoHandler;
@@ -83,7 +84,9 @@ public class BaseScreenHandler extends FXMLScreenHandler {
 
     public void redirectToReturnBike() throws IOException {
         //TODO: init controller
-        BaseScreenHandler returnBikeHandler = new ReturnBikeHandler(this.stage, Configs.RETURN_BIKE_PATH);
+        ReturnBikeHandler returnBikeHandler = new ReturnBikeHandler(this.stage, Configs.RETURN_BIKE_PATH);
+        returnBikeHandler.setBController(new ReturnBikeController(null));
+        returnBikeHandler.initializeDockListView();
         returnBikeHandler.setScreenTitle("Return Bike Screen");
         returnBikeHandler.show();
     }

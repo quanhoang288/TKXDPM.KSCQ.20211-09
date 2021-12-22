@@ -25,14 +25,13 @@ public class Bike {
     @Column(name = "licensePlate")
     private String licensePlate;
     @Column(name = "batteryPercent")
-    private String batteryPercent;
+    private int batteryPercent;
     @Column(name = "value")
-    private String value;
+    private int value;
     @ManyToOne
     @JoinColumn(name = "dockID")
     private Dock dock;
     @OneToMany(mappedBy = "bike")
     private List<BikeRentalInfo> rentedSession;
-
 
 }

@@ -1,11 +1,13 @@
 package ecobike.entity;
 
+import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Builder
 public class PaymentTransaction {
     @Id
     @GeneratedValue(generator = "UUID")
