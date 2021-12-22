@@ -1,4 +1,6 @@
 package ecobike.controller;
 
-public class PaymentController {
+import ecobike.controller.base.BaseController;
+
+public class PaymentController extends BaseController {
 }
