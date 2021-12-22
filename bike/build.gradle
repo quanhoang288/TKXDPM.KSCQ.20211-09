@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'ecobike'
-    mainClass = 'ecobike.HelloApplication'
+    mainClass = 'ecobike.App'
 }
 
 javafx {

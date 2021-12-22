@@ -21,7 +21,7 @@ public class UserSeeder {
         entityManager.getTransaction().begin();
         for (int i = 0; i < 10; i++) {
             String email = "email" + i + "@gmail.com";
-            String name = "name " + i;
+            String name = "user" + i;
             String password = "12345678";
 
             User user = User

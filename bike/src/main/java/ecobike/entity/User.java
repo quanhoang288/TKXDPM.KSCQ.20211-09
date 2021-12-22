@@ -23,6 +23,7 @@ public class User {
             strategy = "uuid2"
     )
     private String id;
+    @Column(unique = true)
     private String name;
     @Column(name = "phoneNumber")
     private String phoneNumber;
