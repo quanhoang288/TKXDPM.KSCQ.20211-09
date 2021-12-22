@@ -24,6 +24,9 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     protected Hashtable<String, String> messages;
     private BaseController bController;
 
+
+
+
     private BaseScreenHandler(String screenPath) throws IOException {
         super(screenPath);
         this.stage = new Stage();
@@ -94,6 +97,7 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     public void redirectToRentalInfo() throws IOException {
         //TODO: init controller
         BaseScreenHandler bikeRentalInfoHandler = new BikeRentalInfoHandler(this.stage, Configs.RENTAL_STATUS_PATH);
+
         bikeRentalInfoHandler.setScreenTitle("Bike Rental Info Screen");
         bikeRentalInfoHandler.show();
     }
