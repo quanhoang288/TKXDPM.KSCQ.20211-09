@@ -59,6 +59,9 @@ public class LoginHandler extends BaseScreenHandler {
             status.setTextFill(Color.color(1,0,0));
 
         }
+        finally {
+            em.getTransaction().commit();
+        }
 
 
 
