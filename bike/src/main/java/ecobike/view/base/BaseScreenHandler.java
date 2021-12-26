@@ -16,13 +16,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 //import views.screen.home.HomeScreenHandler;
 
-public class BaseScreenHandler extends FXMLScreenHandler {
+public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandler {
 
     private Scene scene;
     private BaseScreenHandler prev;
     protected final Stage stage;
     protected Hashtable<String, String> messages;
-    private BaseController bController;
+    private T bController;
 
 
 
@@ -49,6 +49,7 @@ public class BaseScreenHandler extends FXMLScreenHandler {
         if (this.scene == null) {
             this.scene = new Scene(this.content);
         }
+        System.out.println("run show");
         this.stage.setScene(this.scene);
         this.stage.show();
     }
@@ -57,11 +58,11 @@ public class BaseScreenHandler extends FXMLScreenHandler {
         this.stage.setTitle(string);
     }
 
-    public void setBController(BaseController bController){
+    public void setBController(T bController){
         this.bController = bController;
     }
 
-    public BaseController getBController(){
+    public T getBController(){
         return this.bController;
     }
 
@@ -80,9 +81,11 @@ public class BaseScreenHandler extends FXMLScreenHandler {
 
     public void redirectToRentBike() throws IOException {
         //TODO: init controller
-        BaseScreenHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
-        rentBikeHandler.setScreenTitle("Rent Bike Screen");
-        rentBikeHandler.show();
+//        RentBikeHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
+//
+//        rentBikeHandler.setScreenTitle("Rent Bike Screen");
+//        rentBikeHandler.show();
+
     }
 
     public void redirectToReturnBike() throws IOException {
