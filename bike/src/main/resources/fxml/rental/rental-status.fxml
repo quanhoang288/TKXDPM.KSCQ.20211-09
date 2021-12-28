@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane>
+      <GridPane layoutX="1.0" layoutY="10.0" prefHeight="777.0" prefWidth="1375.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="678.0" minWidth="10.0" prefWidth="253.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1113.0" minWidth="10.0" prefWidth="1113.0" />
@@ -16,45 +16,49 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
+            <Pane prefHeight="747.0" prefWidth="258.0" style="-fx-background-color: #eeeeee;">
                <children>
                   <Label layoutX="65.0" layoutY="22.0" text="Ecobike" textAlignment="CENTER" textFill="#57e46e">
                      <font>
                         <Font name="Segoe UI" size="36.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="22.0" layoutY="166.0" prefHeight="257.0" prefWidth="200.0" spacing="30.0">
-                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="200.0" text="Home" textAlignment="CENTER" onMouseClicked="#redirectToHome">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="200.0" text="Rent a bike" textAlignment="CENTER" onMouseClicked="#redirectToRentBike">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="200.0" text="Return bike" textAlignment="CENTER" onMouseClicked="#redirectToReturnBike">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="43.0" prefWidth="200.0" text="View rental status" textAlignment="CENTER" onMouseClicked="#redirectToRentalInfo">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
+                  <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Home" onMouseClicked="#redirectToHome">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="39.0" layoutY="249.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike" onMouseClicked="#redirectToRentBike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="42.0" layoutY="398.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike" onMouseClicked="#redirectToReturnBike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="42.0" layoutY="551.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="View rental status" onMouseClicked="#redirectToRentalInfo">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Button layoutX="479.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Return bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="700.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Pause renting" onMouseClicked="#pauseRentalTime">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+
+                  <Button layoutX="900.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Cancel renting" onMouseClicked="#cancelRentalTime">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -96,12 +100,12 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField editable="false" prefHeight="73.0" prefWidth="440.0" style="-fx-alignment: center;" text="02:30:15" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="rentingTimeText" editable="false" prefHeight="73.0" prefWidth="440.0" style="-fx-alignment: center;" text="02:30:15" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="28,000" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <TextField fx:id="amountToPayText" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="24.0" />
                            </font>

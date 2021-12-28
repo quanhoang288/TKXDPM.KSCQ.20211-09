@@ -23,8 +23,6 @@ public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandl
     private T bController;
 
 
-
-
     private BaseScreenHandler(String screenPath) throws IOException {
         super(screenPath);
         this.stage = new Stage();
@@ -86,7 +84,7 @@ public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandl
     public void redirectToReturnBike() throws IOException {
         //TODO: init controller
         ReturnBikeHandler returnBikeHandler = new ReturnBikeHandler(this.stage, Configs.RETURN_BIKE_PATH);
-        returnBikeHandler.setBController(new ReturnBikeController(null));
+//        returnBikeHandler.setBController(new ReturnBikeController(null));
         returnBikeHandler.initializeDockListView();
         returnBikeHandler.setScreenTitle("Return Bike Screen");
         returnBikeHandler.show();

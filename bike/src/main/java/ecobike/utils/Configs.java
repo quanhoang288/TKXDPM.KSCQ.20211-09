@@ -1,5 +1,7 @@
 package ecobike.utils;
 
+import java.util.HashMap;
+
 public class Configs {
     public static final String MONGODB_URI      =   "mongodb+srv://" +
                                                     "<username>" +

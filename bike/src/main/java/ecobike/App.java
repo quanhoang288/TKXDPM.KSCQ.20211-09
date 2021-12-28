@@ -13,6 +13,7 @@ public class App extends Application {
         LoginHandler loginHandler = new LoginHandler(stage, Configs.LOGIN_PATH);
         loginHandler.setScreenTitle("Home Screen");
         loginHandler.show();
+
     }
 
     public static void main(String[] args) {

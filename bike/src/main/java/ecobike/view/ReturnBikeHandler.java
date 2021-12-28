@@ -19,17 +19,16 @@ public class ReturnBikeHandler extends BaseScreenHandler {
     }
 
     @FXML
-    public void selectDock() throws IOException {
+    public void requestToReturnBike() throws IOException {
         if (this.dockListView.getSelectionModel().isEmpty()) {
             PopupScreen.error("You have to select a dock to return bike");
             return;
         }
         try {
             int selectedIndex = this.dockListView.getSelectionModel().getSelectedIndex();
-            getBController().checkDockHasEmptySlot(selectedIndex);
+            getBController().returnBike(selectedIndex);
         } catch (DockFullException e) {
             PopupScreen.error(e.getMessage());
-            return;
         }
     }
 
@@ -38,8 +37,8 @@ public class ReturnBikeHandler extends BaseScreenHandler {
     }
 
     public void initializeDockListView() {
-        List<String> dockNames = getBController().getDockNames();
-        this.dockListView.getItems().addAll(dockNames);
+//        List<String> dockNames = getBController().getDockNames();
+//        this.dockListView.getItems().addAll(dockNames);
     }
 
 }
