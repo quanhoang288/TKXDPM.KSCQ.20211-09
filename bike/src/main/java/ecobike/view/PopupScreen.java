@@ -5,12 +5,17 @@ import ecobike.view.base.BaseScreenHandler;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class PopupScreen extends BaseScreenHandler {
 
@@ -51,7 +56,15 @@ public class PopupScreen extends BaseScreenHandler {
     }
 
     public void setImage(String path) {
-        super.setImage(tickicon, path);
+//        super.setImage(tickicon, path);
+        try{
+            URI file = getClass().getResource(path).toURI();
+            Image img = new Image(file.toString());
+            tickicon.setImage(img);
+        }
+        catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     public void show(Boolean autoclose) {
