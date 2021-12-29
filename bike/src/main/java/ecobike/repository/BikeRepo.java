@@ -4,6 +4,7 @@ import ecobike.db.DbConnection;
 import ecobike.entity.Bike;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -26,21 +27,28 @@ public class BikeRepo {
 
 
         q.setFirstResult(start);
-
         q.setMaxResults(count);
         List<Bike> bikes = (List<Bike>) q.getResultList();
         entityManager.getTransaction().commit();
         return bikes;
     }
 
-    public static Bike findById(String id) {
+    public static Bike findById(String id) throws NoResultException {
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.id = :id");
         q.setParameter("id", id);
-        Bike bike = (Bike) q.getSingleResult();
-        entityManager.getTransaction().commit();
+        Bike bike = null;
+        try {
+            bike = (Bike) q.getSingleResult();
+        } catch (NoResultException e) {
+            throw e;
+        } finally {
+            entityManager.getTransaction().commit();
+        }
+
         return bike;
     }
+
 }
 
 

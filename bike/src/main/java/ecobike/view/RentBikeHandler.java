@@ -1,18 +1,23 @@
 package ecobike.view;
 
+import ecobike.controller.BikeInfoController;
 import ecobike.controller.RentBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.entity.Bike;
+import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,11 +27,53 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
 
     @FXML
     private Pagination pagination;
+    @FXML
+    private TextField searchText;
+    @FXML
+    private Button searchBtn;
 
 
     public RentBikeHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
+        initialize();
+
     }
+
+
+    
+
+    private void initialize() {
+        searchBtn.setOnMouseClicked((MouseEvent e) -> {
+            String searchTxt = searchText.getText();
+            RentBikeController ctrl = ((RentBikeController) getBController());
+            String bikeId = ctrl.convertBarcodeToId(searchTxt);
+            Bike bike = null;
+            try {
+                bike = ctrl.findById(bikeId);
+                initBikeInfoScreen(bike);
+            } catch (NoResultException exception) {
+                System.out.println("Cannot find bike");
+            }
+
+        });
+    }
+
+    private void initBikeInfoScreen(Bike bike) {
+        BikeInfoHandler bikeInfoHandler = null;
+        try {
+            bikeInfoHandler = new BikeInfoHandler(this.stage, Configs.BIKE_DETAIL_PATH);
+        } catch (IOException e) {
+            System.out.println("Sth went wrong");
+            return;
+        }
+        bikeInfoHandler.setPreviousScreen(this);
+        bikeInfoHandler.setBController(new BikeInfoController(bike));
+        bikeInfoHandler.initializeInfo();
+        bikeInfoHandler.show();
+
+
+    }
+
 
     private GridPane createGridTemplate(int rows, int cols, int gap) {
         GridPane grid = new GridPane();
@@ -55,7 +102,7 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
 
         Label label = new Label("Item Nr. " + bike.getType());
         label.setOnMouseClicked((MouseEvent e) -> {
-            System.out.println("OK");
+            initBikeInfoScreen(bike);
         });
         container.getChildren().add(label);
         return container;
@@ -96,7 +143,5 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
             return grid;
 
         });
-
-
     }
 }
