@@ -32,12 +32,22 @@ public class PopupScreen extends BaseScreenHandler {
         return popup;
     }
 
-    public static void success(String message) throws IOException{
-        popup(message, Configs.IMAGE_PATH + "/" + "check.png", true).show(true);
+    public static void success(String message){
+        try{
+            popup(message, Configs.IMAGE_PATH + "/" + "check.png", true).show(true);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
-    public static void error(String message) throws IOException{
-        popup(message, Configs.IMAGE_PATH + "/" + "times.png", false).show(false);
+    public static void error(String message) {
+        try {
+            popup(message, Configs.IMAGE_PATH + "/" + "times.png", false).show(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setImage(String path) {
