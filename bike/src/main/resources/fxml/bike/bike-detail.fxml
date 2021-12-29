@@ -98,7 +98,7 @@
                      </content>
                   </ScrollPane>
                   <Label layoutX="60.0" layoutY="61.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="GENERAL INFORMATION" />
-                  <Button layoutX="869.0" layoutY="561.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24; -fx-background-color: red;" text="Rent bike" textFill="WHITE" />
+                  <Button fx:id="rentBikeBtn" layoutX="869.0" layoutY="561.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24; -fx-background-color: red;" text="Rent bike" textFill="WHITE" />
                   <GridPane layoutX="574.0" layoutY="275.0" prefHeight="132.0" prefWidth="540.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

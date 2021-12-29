@@ -1,15 +1,22 @@
 package ecobike.view;
 
 import ecobike.controller.BikeInfoController;
+import ecobike.controller.PaymentController;
 import ecobike.entity.Bike;
+import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class BikeInfoHandler extends BaseScreenHandler {
+
+    @FXML
+    private Button rentBikeBtn;
 
     @FXML
     private Label type;
@@ -20,6 +27,7 @@ public class BikeInfoHandler extends BaseScreenHandler {
 
     public BikeInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
+        componentDidMount();
 
     }
     public void initializeInfo(){
@@ -30,6 +38,21 @@ public class BikeInfoHandler extends BaseScreenHandler {
         batteryPercent.setText(bike.getBatteryPercent()+"%");
 
 
+    }
+    public void componentDidMount(){
+        rentBikeBtn.setOnMouseClicked((MouseEvent e) ->{
+            try {
+                PaymentFormHandler paymentFormHandler = new PaymentFormHandler(this.stage, Configs.PAYMENT_FORM_PATH);
+                PaymentController paymentController = new PaymentController();
+                paymentFormHandler.setBController(paymentController);
+                paymentController.attach(((BikeInfoController) getBController()));
+                paymentFormHandler.show();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        });
     }
 
 }

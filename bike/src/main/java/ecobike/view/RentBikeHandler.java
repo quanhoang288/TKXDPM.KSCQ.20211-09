@@ -5,6 +5,7 @@ import ecobike.controller.RentBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.entity.Bike;
 import ecobike.utils.Configs;
+import ecobike.utils.PaymentObserver;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler<T> {
+public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler<T>  {
 
 
     @FXML
@@ -50,9 +51,7 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
                 bike = ctrl.findById(bikeId);
                 initBikeInfoScreen(bike);
             } catch (NoResultException exception) {
-
                 PopupScreen.error("Cannot find any bike that matches provided barcode");
-
             }
 
         });
@@ -144,4 +143,6 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
 
         });
     }
+
+
 }
