@@ -40,8 +40,6 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
     }
 
 
-    
-
     private void initialize() {
         searchBtn.setOnMouseClicked((MouseEvent e) -> {
             String searchTxt = searchText.getText();
@@ -52,7 +50,9 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
                 bike = ctrl.findById(bikeId);
                 initBikeInfoScreen(bike);
             } catch (NoResultException exception) {
-                System.out.println("Cannot find bike");
+
+                PopupScreen.error("Cannot find any bike that matches provided barcode");
+
             }
 
         });
