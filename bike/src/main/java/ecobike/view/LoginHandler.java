@@ -48,7 +48,7 @@ public class LoginHandler extends BaseScreenHandler {
             System.out.println(user);
 
             //set principle
-            Authentication.getInstance(username, user.getId());
+            Authentication.createInstance(username, user.getId());
 
             DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
             dockListHandler.setBController(new DockController());

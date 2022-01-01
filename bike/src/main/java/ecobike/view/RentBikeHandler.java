@@ -2,8 +2,9 @@ package ecobike.view;
 
 import ecobike.controller.BikeInfoController;
 import ecobike.controller.RentBikeController;
-import ecobike.controller.base.BaseController;
+import ecobike.controller.RentBikeResultController;
 import ecobike.entity.Bike;
+import ecobike.entity.PaymentTransaction;
 import ecobike.utils.Configs;
 import ecobike.utils.PaymentObserver;
 import ecobike.view.base.BaseScreenHandler;
@@ -144,6 +145,7 @@ public class RentBikeHandler extends BaseScreenHandler<RentBikeController>  {
 
         });
     }
+
 
 
 }

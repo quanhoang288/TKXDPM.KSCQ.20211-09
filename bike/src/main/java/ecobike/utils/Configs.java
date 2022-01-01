@@ -26,6 +26,7 @@ public class Configs {
     public static final String PAYMENT_FORM_PATH = "/fxml/payment/payment-form.fxml";
     public static final String PAYMENT_FAILURE_PATH = "/fxml/payment/payment-failure.fxml";
     public static final String PAYMENT_SUCCESS_PATH = "/fxml/payment/payment-success.fxml";
+    public static final String PAYMENT_RENT_SUCCESS_PATH = "/fxml/payment/payment-rent-success.fxml";
     public static final String POPUP_PATH = "/fxml/popup.fxml";
     public static final String LOGIN_PATH = "/fxml/auth/login.fxml";
 }

@@ -1,6 +1,6 @@
 package ecobike.view;
 
-import ecobike.controller.PaymentController;
+import ecobike.controller.RentBikePaymentController;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,8 +18,8 @@ public class PaymentFormHandler extends BaseScreenHandler {
     }
     private void componentDidMount(){
         submit.setOnMouseClicked((MouseEvent e) ->{
-            PaymentController paymentController = (PaymentController) getBController();
-            paymentController.pay();
+            RentBikePaymentController rentBikePaymentController = (RentBikePaymentController) getBController();
+            rentBikePaymentController.performTransactions();
         });
     }
 }

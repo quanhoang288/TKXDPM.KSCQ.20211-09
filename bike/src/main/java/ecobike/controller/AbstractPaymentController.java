@@ -1,14 +1,14 @@
 package ecobike.controller;
 
-
 import ecobike.controller.base.BaseController;
+import ecobike.entity.PaymentTransaction;
 import ecobike.utils.PaymentObserver;
 import ecobike.utils.PaymentPublishser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentController extends BaseController implements PaymentPublishser {
+public abstract class AbstractPaymentController extends BaseController implements PaymentPublishser {
     List<PaymentObserver> observers = new ArrayList<>();
 
     @Override
@@ -18,17 +18,15 @@ public class PaymentController extends BaseController implements PaymentPublishs
 
     @Override
     public void detached(PaymentObserver paymentObserver) {
-        assert observers.contains(paymentObserver); 
+        assert observers.contains(paymentObserver);
         observers.remove(paymentObserver);
     }
 
     @Override
-    public void notifyAllObserver() {
+    public void notifyAllObserver(List<PaymentTransaction> transactions) {
         for (PaymentObserver paymentObserver : observers){
-            paymentObserver.update();
+            paymentObserver.update(transactions);
         }
     }
-    public void pay(){
-        notifyAllObserver();
-    }
+    public abstract void performTransactions();
 }

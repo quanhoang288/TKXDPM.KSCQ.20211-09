@@ -21,13 +21,16 @@ public class Authentication {
     }
 
     //init session
-    public static Authentication getInstance(String username, String userId) {
-        if(authenticationInstance == null){
+    public static Authentication getInstance() {
+        return authenticationInstance;
+    }
+
+    public static Authentication createInstance(String username, String userId){
+        if (authenticationInstance== null){
             authenticationInstance = new Authentication(username, userId);
         }
         return authenticationInstance;
     }
-
 
     private static void clearSession() {
         authenticationInstance = null;

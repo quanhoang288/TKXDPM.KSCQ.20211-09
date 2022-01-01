@@ -2,9 +2,12 @@ package ecobike.controller;
 
 import ecobike.controller.base.BaseController;
 import ecobike.entity.Bike;
+import ecobike.entity.PaymentTransaction;
 import ecobike.utils.PaymentObserver;
 
-public class BikeInfoController extends BaseController implements PaymentObserver {
+import java.util.List;
+
+public class BikeInfoController extends BaseController {
     private Bike bike;
 
     public BikeInfoController(Bike bike){
@@ -15,8 +18,5 @@ public class BikeInfoController extends BaseController implements PaymentObserve
         return bike;
     }
 
-    @Override
-    public void update() {
-        System.out.println("callback");
-    }
+
 }
