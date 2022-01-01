@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler<T>  {
+public class RentBikeHandler extends BaseScreenHandler<RentBikeController>  {
 
 
     @FXML
@@ -44,7 +44,8 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
     private void initialize() {
         searchBtn.setOnMouseClicked((MouseEvent e) -> {
             String searchTxt = searchText.getText();
-            RentBikeController ctrl = ((RentBikeController) getBController());
+            RentBikeController ctrl = getBController();
+
             String bikeId = ctrl.convertBarcodeToId(searchTxt);
             Bike bike = null;
             try {
@@ -134,7 +135,7 @@ public class RentBikeHandler<T extends BaseController> extends BaseScreenHandler
             int cols = 3;
             int count = rows * cols;
 
-            List<Bike> bikes = ((RentBikeController) getBController()).loadBikeFromDB(count * index, count);
+            List<Bike> bikes = getBController().loadBikeFromDB(count * index, count);
             GridPane grid = createGridTemplate(rows, cols, 10);
             populateGridItems(bikes.stream().map((item) -> createGridItem(item)).collect(Collectors.toList()), grid);
 

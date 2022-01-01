@@ -2,6 +2,7 @@ package ecobike.view;
 
 import ecobike.controller.BikeInfoController;
 import ecobike.controller.PaymentController;
+import ecobike.controller.RentBikeController;
 import ecobike.entity.Bike;
 import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BikeInfoHandler extends BaseScreenHandler {
+public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
 
     @FXML
     private Button rentBikeBtn;
@@ -28,10 +29,10 @@ public class BikeInfoHandler extends BaseScreenHandler {
     public BikeInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         componentDidMount();
-
     }
+
     public void initializeInfo(){
-        BikeInfoController ctrl = ((BikeInfoController) getBController());
+        BikeInfoController ctrl = getBController();
         Bike bike = ctrl.getBike();
         type.setText(bike.getType());
         licensePlate.setText(bike.getLicensePlate());
@@ -45,7 +46,7 @@ public class BikeInfoHandler extends BaseScreenHandler {
                 PaymentFormHandler paymentFormHandler = new PaymentFormHandler(this.stage, Configs.PAYMENT_FORM_PATH);
                 PaymentController paymentController = new PaymentController();
                 paymentFormHandler.setBController(paymentController);
-                paymentController.attach(((BikeInfoController) getBController()));
+                paymentController.attach(getBController());
                 paymentFormHandler.show();
 
             } catch (IOException ex) {
