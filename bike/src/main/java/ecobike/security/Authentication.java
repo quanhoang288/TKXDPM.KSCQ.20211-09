@@ -1,10 +1,19 @@
 package ecobike.security;
 
+import lombok.Getter;
+
+
 public class Authentication {
     private static Authentication authenticationInstance;
     private String username;
     private String userId;
 
+    public String getUserId() {
+        return userId;
+    }
+    public String getPrinciple(){
+        return username;
+    }
 
     private Authentication(String username, String userId){
         this.username = username;
