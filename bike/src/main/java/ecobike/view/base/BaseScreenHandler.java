@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 
+import ecobike.controller.DockController;
 import ecobike.controller.ReturnBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.utils.Configs;
@@ -73,18 +74,15 @@ public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandl
     }
 
     public void redirectToHome() throws IOException {
-        //TODO: init controller
-        BaseScreenHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
+        DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
+        dockListHandler.setBController(new DockController());
+        dockListHandler.initDockList();
         dockListHandler.setScreenTitle("Home Screen");
         dockListHandler.show();
     }
 
     public void redirectToRentBike() throws IOException {
-        //TODO: init controller
-//        RentBikeHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
-//
-//        rentBikeHandler.setScreenTitle("Rent Bike Screen");
-//        rentBikeHandler.show();
+        //TODO: ignore button
 
     }
 
@@ -105,7 +103,5 @@ public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandl
         bikeRentalInfoHandler.show();
     }
 
-    public void forward(Hashtable messages) {
-        this.messages = messages;
-    }
+
 }

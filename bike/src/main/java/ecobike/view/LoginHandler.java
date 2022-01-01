@@ -1,5 +1,6 @@
 package ecobike.view;
 
+import ecobike.controller.DockController;
 import ecobike.db.DbConnection;
 import ecobike.entity.User;
 import ecobike.security.Authentication;
@@ -38,7 +39,7 @@ public class LoginHandler extends BaseScreenHandler {
         String username = this.username.getText();
         String password = this.password.getText();
         EntityManager em = DbConnection.getEntityManager();
-        em.getTransaction().begin();
+
         Query query = em.createQuery("select u from User u where u.name = :username and u.password = :password ");
         query.setParameter("username", username);
         query.setParameter("password", password);
@@ -50,7 +51,9 @@ public class LoginHandler extends BaseScreenHandler {
             Authentication.getInstance(username, user.getId());
 
             DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
+            dockListHandler.setBController(new DockController());
             dockListHandler.setPreviousScreen(this);
+            dockListHandler.initDockList();
             dockListHandler.show();
         }
         catch (NoResultException e){
@@ -60,7 +63,7 @@ public class LoginHandler extends BaseScreenHandler {
 
         }
         finally {
-            em.getTransaction().commit();
+
         }
 
 
