@@ -11,20 +11,18 @@ import java.util.Map;
 
 public class InterbankSubsystemController {
 
+    private static final String PUBLIC_KEY = "A5NouKUnbP8=";
+    private static final String SECRET_KEY = "Bb/W/eu7ZdY=";
     private static final String PAY_COMMAND = "pay";
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.0.1";
 
     private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
-    public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+    public PaymentTransaction performRefund(CreditCard card, int amount, String contents) {
         return null;
     }
 
-    private String generateData(Map<String, Object> data) {
-        return ((MyMap) data).toJSON();
-    }
-
-    public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
+    public PaymentTransaction performPayment(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -38,12 +36,17 @@ public class InterbankSubsystemController {
         transaction.put("createdAt", Utils.getToday());
 
         Map<String, Object> requestMap = new MyMap();
+        requestMap.put("secretKey", SECRET_KEY);
         requestMap.put("version", VERSION);
         requestMap.put("transaction", transaction);
+        requestMap.put("appCode", PUBLIC_KEY);
+        requestMap.put("hashCode", Utils.md5(((MyMap) requestMap).toJSON()));
+        requestMap.remove("secretKey");
 
-        System.out.println(Configs.PROCESS_TRANSACTION_URL);
-        System.out.println(requestMap);
-        String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
+
+        System.out.println("REQUEST BODY: " + requestMap);
+        String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, ((MyMap) requestMap).toJSON());
+        System.out.println("RESPONSE: " + responseText);
         MyMap response = null;
         try {
             response = MyMap.toMyMap(responseText, 0);

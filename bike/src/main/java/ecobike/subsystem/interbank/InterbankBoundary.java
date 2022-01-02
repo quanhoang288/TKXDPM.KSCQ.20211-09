@@ -7,7 +7,7 @@ public class InterbankBoundary {
     String query(String url, String data) {
         String response = null;
         try {
-            response = API.post(url, data, "bearer code");
+            response = API.post(url, data, null);
         } catch (Exception e) {
             throw new UnrecognizedException();
         }

@@ -1,5 +1,6 @@
 package ecobike.view;
 
+import ecobike.common.exception.InvalidCardException;
 import ecobike.controller.PaymentController;
 import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
@@ -29,8 +30,6 @@ public class PaymentFormHandler extends BaseScreenHandler {
     @FXML
     private TextArea desc;
 
-    private int amount = 10;
-
     @FXML
     private Button submitButton;
 
@@ -38,21 +37,24 @@ public class PaymentFormHandler extends BaseScreenHandler {
         super(stage, screenPath);
         submitButton.setOnMouseClicked(event -> {
             try {
-                HashMap<String, String> messages = new HashMap<>();
+                HashMap<String, String> paymentInfo = new HashMap<>();
 
-                messages.put("cardHolder", cardHolder.getText());
-                messages.put("cardNumber", cardNumber.getText());
-                messages.put("issuingBank", cardNumber.getText());
-                messages.put("instructions", issuingBank.getText());
-                messages.put("expirationDate", expirationDate.getText());
-                messages.put("cvv", cvv.getText());
-                messages.put("desc", desc.getText());
+                paymentInfo.put("cardHolder", cardHolder.getText());
+                paymentInfo.put("cardNumber", cardNumber.getText());
+                paymentInfo.put("instructions", issuingBank.getText());
+                paymentInfo.put("expirationDate", expirationDate.getText());
+                paymentInfo.put("cvv", cvv.getText());
+                paymentInfo.put("desc", desc.getText());
 
-                confirmToPayOrder();
+                validateRequiredInput(paymentInfo);
+            } catch (InvalidCardException e) {
+                System.out.println(e.getMessage());
+            }
 
+            try {
+                confirmToRentBike();
                 BaseScreenHandler resultScreenHandler = new ResultScreenHandler(this.stage, Configs.PAYMENT_SUCCESS_PATH);
                 resultScreenHandler.setPreviousScreen(this);
-                resultScreenHandler.setScreenTitle("RentBike");
                 resultScreenHandler.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,13 +62,30 @@ public class PaymentFormHandler extends BaseScreenHandler {
         });
     }
 
-    void confirmToPayOrder() throws IOException{
+    public void confirmToRentBike() throws IOException{
         PaymentController ctrl = (PaymentController) getBController();
-        Map<String, String> response = ctrl.payOrder(10, "pay order", cardNumber.getText(), cardHolder.getText(),
+        Map<String, String> response = ctrl.performPayment(10, "pay order", cardNumber.getText(), cardHolder.getText(),
                 expirationDate.getText(), cvv.getText());
 
         System.out.println("RESULT " + response.get("RESULT"));
         System.out.println("MESSAGE " + response.get("MESSAGE"));
+    }
+
+    private void validateRequiredInput(HashMap<String, String> inputs) {
+        String errMsg = "";
+        HashMap<String, String> validationRules = new HashMap<>();
+        validationRules.put("cardHolder", "Card holder field is required");
+        validationRules.put("cardNumber", "Card number field is required");
+        validationRules.put("expirationDate", "Expiration date field is required");
+        validationRules.put("cvv", "Security code field is required");
+
+        for (Map.Entry<String, String> rule : validationRules.entrySet()) {
+            if (inputs.get(rule.getKey()) == "") {
+                errMsg += rule.getValue() + "\n";
+            }
+        }
+
+        if (errMsg != "") throw  new InvalidCardException(errMsg);
     }
 
 }

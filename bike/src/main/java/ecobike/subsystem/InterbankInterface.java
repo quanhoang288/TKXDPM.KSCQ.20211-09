@@ -7,9 +7,9 @@ import ecobike.entity.PaymentTransaction;
 
 public interface InterbankInterface {
 
-    public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents)
+    public abstract PaymentTransaction performPayment(CreditCard card, int amount, String contents)
             throws PaymentException, UnrecognizedException;
 
-    public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
+    public abstract PaymentTransaction performRefund(CreditCard card, int amount, String contents)
             throws PaymentException, UnrecognizedException;
 }

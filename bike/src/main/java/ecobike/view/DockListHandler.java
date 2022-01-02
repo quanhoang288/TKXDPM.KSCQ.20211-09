@@ -27,7 +27,7 @@ public class DockListHandler extends BaseScreenHandler {
     @FXML
     public void viewDockDetail() throws IOException {
         //TODO: initialize controller for dock detail handler
-        System.out.println("asdfasdfasdfadf");
+
 //        BaseScreenHandler dockDetailHandler = new ViewDockHandler(this.stage, Configs.DOCK_DETAIL_PATH);
 //        dockDetailHandler.setPreviousScreen(this);
 //        dockDetailHandler.setScreenTitle("Dock Detail Screen");
