@@ -17,6 +17,4 @@ public class BikeInfoController extends BaseController {
     public Bike getBike() {
         return bike;
     }
-
-
 }

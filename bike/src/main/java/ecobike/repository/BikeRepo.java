@@ -8,10 +8,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
-public class BikeRepo {
+public class BikeRepo implements IBikeRepo {
     private static EntityManager entityManager = DbConnection.getEntityManager();
 
-    public static List<Bike> getAllByDock(String dockId) {
+    public  List<Bike> getAllByDock(String dockId) {
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.dock.id = :dockId");
         q.setParameter("dockId", dockId);
@@ -20,7 +20,7 @@ public class BikeRepo {
         return bikes;
     }
 
-    public static List<Bike> getPagingByDock(int start, int count, String dockId) {
+    public  List<Bike> getPagingByDock(int start, int count, String dockId) {
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.dock.id = :dockId");
         q.setParameter("dockId", dockId);
@@ -33,7 +33,7 @@ public class BikeRepo {
         return bikes;
     }
 
-    public static Bike findById(String id) throws NoResultException {
+    public  Bike findById(String id) throws NoResultException {
         entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.id = :id");
         q.setParameter("id", id);

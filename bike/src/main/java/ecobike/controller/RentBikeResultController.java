@@ -16,4 +16,5 @@ public class RentBikeResultController extends BaseController {
     private String dockName;
     private String depositAmount;
 
+
 }

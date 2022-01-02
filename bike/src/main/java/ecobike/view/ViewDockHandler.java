@@ -2,6 +2,7 @@ package ecobike.view;
 
 import ecobike.controller.DockInfoController;
 import ecobike.controller.RentBikeController;
+import ecobike.repository.BikeRepo;
 import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.stage.Stage;
@@ -18,7 +19,7 @@ public class ViewDockHandler extends BaseScreenHandler<DockInfoController> {
         RentBikeHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
         rentBikeHandler.setPreviousScreen(this);
 
-        rentBikeHandler.setBController(new RentBikeController(getBController().getDockId()));
+        rentBikeHandler.setBController(new RentBikeController(getBController().getDockId(), new BikeRepo()));
         rentBikeHandler.initializeBikes();
         rentBikeHandler.setScreenTitle("Bike List Screen");
         rentBikeHandler.show();
