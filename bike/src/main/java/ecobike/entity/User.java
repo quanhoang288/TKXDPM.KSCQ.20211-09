@@ -2,6 +2,7 @@ package ecobike.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class User {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -21,6 +23,7 @@ public class User {
             strategy = "uuid2"
     )
     private String id;
+    @Column(unique = true)
     private String name;
     @Column(name = "phoneNumber")
     private String phoneNumber;

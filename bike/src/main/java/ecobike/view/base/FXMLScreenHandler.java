@@ -27,4 +27,10 @@ public class FXMLScreenHandler {
     public FXMLLoader getLoader() {
         return this.loader;
     }
+
+    public void setImage(ImageView imv, String path){
+        File file = new File(path);
+        Image img = new Image(file.toURI().toString());
+        imv.setImage(img);
+    }
 }

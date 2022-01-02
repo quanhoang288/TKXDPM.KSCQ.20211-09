@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="790.0" prefWidth="1278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -30,22 +23,22 @@
                         <Font name="Segoe UI" size="36.0" />
                      </font>
                   </Label>
-                  <Button layoutX="17.0" layoutY="117.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Home" onMouseClicked="#redirectToHome">
+                  <Button layoutX="17.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#redirectToHome" prefHeight="43.0" prefWidth="175.0" text="Home">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="17.0" layoutY="245.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike" onMouseClicked="#redirectToRentBike">
+                  <Button layoutX="17.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#redirectToRentBike" prefHeight="43.0" prefWidth="175.0" text="Rent a bike">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="17.0" layoutY="385.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike" onMouseClicked="#redirectToReturnBike">
+                  <Button layoutX="17.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#redirectToReturnBike" prefHeight="43.0" prefWidth="175.0" text="Return bike">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="17.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="View rental status" onMouseClicked="#redirectToRentalInfo">
+                  <Button layoutX="17.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#redirectToRentalInfo" prefHeight="43.0" prefWidth="175.0" text="View rental status">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -81,13 +74,13 @@
                            </rowConstraints>
                            <children>
                               <Label style="-fx-font-size: 24;" text="Name" />
-                              <Label style="-fx-font-size: 24;" text="Trinx-Ebike" GridPane.columnIndex="1" />
+                              <Label fx:id="name" style="-fx-font-size: 24;" text="Trinx-Ebike" GridPane.columnIndex="1" />
                               <Label style="-fx-font-size: 24;" text="Type" GridPane.rowIndex="1" />
-                              <Label style="-fx-font-size: 24;" text="Electric" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="type" style="-fx-font-size: 24;" text="Electric" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label style="-fx-font-size: 24;" text="Weight" GridPane.rowIndex="2" />
                               <Label style="-fx-font-size: 24;" text="5kg" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Label style="-fx-font-size: 24;" text="License plate" GridPane.rowIndex="3" />
-                              <Label style="-fx-font-size: 24;" text="9999" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="licensePlate" style="-fx-font-size: 24;" text="9999" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label style="-fx-font-size: 24;" text="Manuafacturing date" GridPane.rowIndex="4" />
                               <Label style="-fx-font-size: 24;" text="10/10/2020" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Label style="-fx-font-size: 24;" text="Producer" GridPane.rowIndex="5" />
@@ -95,7 +88,7 @@
                               <Label style="-fx-font-size: 24;" text="Cost" GridPane.rowIndex="6" />
                               <Label style="-fx-font-size: 24;" text="5.000.000 VND" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label style="-fx-font-size: 24;" text="Battery percentage" GridPane.rowIndex="7" />
-                              <Label style="-fx-font-size: 24;" text="95%" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="batteryPercent" style="-fx-font-size: 24;" text="95%" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <Label style="-fx-font-size: 24;" text="Load cycle" GridPane.rowIndex="8" />
                               <Label style="-fx-font-size: 24;" text="5" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                               <Label style="-fx-font-size: 24;" text="Estimated usage time remaining" GridPane.rowIndex="9" />
@@ -105,7 +98,7 @@
                      </content>
                   </ScrollPane>
                   <Label layoutX="60.0" layoutY="61.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="GENERAL INFORMATION" />
-                  <Button layoutX="869.0" layoutY="561.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24; -fx-background-color: red;" text="Rent bike" textFill="WHITE" />
+                  <Button fx:id="rentBikeBtn" layoutX="869.0" layoutY="561.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24; -fx-background-color: red;" text="Rent bike" textFill="WHITE" />
                   <GridPane layoutX="574.0" layoutY="275.0" prefHeight="132.0" prefWidth="540.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

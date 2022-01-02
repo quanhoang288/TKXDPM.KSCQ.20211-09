@@ -1,11 +1,16 @@
 package ecobike.entity;
 
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
+@Builder
+@AllArgsConstructor
+
 public class PaymentTransaction {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -13,10 +18,11 @@ public class PaymentTransaction {
             name = "UUID",
             strategy = "uuid2"
     )
-    private String  id;
+    private String id;
     private String errorCode;
     private String content;
-    private String method;
+    @Enumerated(EnumType.STRING)
+    private PAYCONTENT method;
     private int amount;
     @Column(name = "createAt")
     private Date createAt;

@@ -47,6 +47,7 @@
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1121.0" GridPane.columnIndex="1">
                <children>
                   <Button fx:id="submitButton" layoutX="456.0" layoutY="629.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="152.0" style="-fx-font-size: 24;" text="Submit" textFill="#1570d0" />
+
                   <GridPane layoutX="81.0" layoutY="61.0" prefHeight="520.0" prefWidth="901.0" AnchorPane.topAnchor="61.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

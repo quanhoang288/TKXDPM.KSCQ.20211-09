@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'ecobike'
-    mainClass = 'ecobike.HelloApplication'
+    mainClass = 'ecobike.App'
 }
 
 javafx {
@@ -47,6 +47,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.2.0'
 }
 
 test {

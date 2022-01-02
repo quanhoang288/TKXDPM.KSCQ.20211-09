@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 
+import ecobike.controller.DockController;
+import ecobike.controller.ReturnBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.utils.Configs;
 import ecobike.view.BikeRentalInfoHandler;
@@ -15,13 +17,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 //import views.screen.home.HomeScreenHandler;
 
-public class BaseScreenHandler extends FXMLScreenHandler {
+public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandler {
 
     private Scene scene;
     private BaseScreenHandler prev;
     protected final Stage stage;
     protected Hashtable<String, String> messages;
-    private BaseController bController;
+    private T bController;
+
+
+
 
     private BaseScreenHandler(String screenPath) throws IOException {
         super(screenPath);
@@ -45,6 +50,7 @@ public class BaseScreenHandler extends FXMLScreenHandler {
         if (this.scene == null) {
             this.scene = new Scene(this.content);
         }
+        System.out.println("run show");
         this.stage.setScene(this.scene);
         this.stage.show();
     }
@@ -53,11 +59,11 @@ public class BaseScreenHandler extends FXMLScreenHandler {
         this.stage.setTitle(string);
     }
 
-    public void setBController(BaseController bController){
+    public void setBController(T bController){
         this.bController = bController;
     }
 
-    public BaseController getBController(){
+    public T getBController(){
         return this.bController;
     }
 
@@ -68,22 +74,23 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     }
 
     public void redirectToHome() throws IOException {
-        //TODO: init controller
-        BaseScreenHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
+        DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
+        dockListHandler.setBController(new DockController());
+        dockListHandler.initDockList();
         dockListHandler.setScreenTitle("Home Screen");
         dockListHandler.show();
     }
 
     public void redirectToRentBike() throws IOException {
-        //TODO: init controller
-        BaseScreenHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
-        rentBikeHandler.setScreenTitle("Rent Bike Screen");
-        rentBikeHandler.show();
+        //TODO: ignore button
+
     }
 
     public void redirectToReturnBike() throws IOException {
         //TODO: init controller
-        BaseScreenHandler returnBikeHandler = new ReturnBikeHandler(this.stage, Configs.RETURN_BIKE_PATH);
+        ReturnBikeHandler returnBikeHandler = new ReturnBikeHandler(this.stage, Configs.RETURN_BIKE_PATH);
+        returnBikeHandler.setBController(new ReturnBikeController(null));
+        returnBikeHandler.initializeDockListView();
         returnBikeHandler.setScreenTitle("Return Bike Screen");
         returnBikeHandler.show();
     }
@@ -91,11 +98,10 @@ public class BaseScreenHandler extends FXMLScreenHandler {
     public void redirectToRentalInfo() throws IOException {
         //TODO: init controller
         BaseScreenHandler bikeRentalInfoHandler = new BikeRentalInfoHandler(this.stage, Configs.RENTAL_STATUS_PATH);
+
         bikeRentalInfoHandler.setScreenTitle("Bike Rental Info Screen");
         bikeRentalInfoHandler.show();
     }
 
-    public void forward(Hashtable messages) {
-        this.messages = messages;
-    }
+
 }
