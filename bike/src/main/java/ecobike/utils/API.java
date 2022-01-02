@@ -57,27 +57,38 @@ public class API {
     public static String post(String url, String data, String token) throws IOException {
         allowMethods("PATCH");
 
-        HttpURLConnection conn = setupConnection(url, "PATCH", token);
+        LOGGER.info("Creating connection " + "\n");
 
+        HttpURLConnection conn = setupConnection(url, "PATCH", token);
+        LOGGER.info("Connection: " + conn);
         Writer writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
         writer.write(data);
         writer.close();
-
+        LOGGER.info("Reading server response");
         return readResponse(conn);
+
     }
 
     /**
      * other supported methods function call
-     * @deprecated only works with Java <= 11
      * @param methods: supported methods PATCH, PUT,...
      */
     private static void allowMethods(String... methods) {
         try {
             Field methodsField = HttpURLConnection.class.getDeclaredField("methods");
-            methodsField.setAccessible(true);
+            try {
+                methodsField.setAccessible(true);
+            } catch (Exception e) {
+                LOGGER.info(e.getMessage());
+            }
 
             Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
+            try {
+                modifiersField.setAccessible(true);
+            } catch (Exception e) {
+                LOGGER.info(e.getMessage());
+            }
+
             modifiersField.setInt(methodsField, methodsField.getModifiers() & ~Modifier.FINAL);
 
             String[] oldMethods = (String[]) methodsField.get(null);
@@ -108,7 +119,7 @@ public class API {
         conn.setDoOutput(true);
         conn.setRequestMethod(method);
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer " + token);
+        if (token != null) conn.setRequestProperty("Authorization", "Bearer " + token);
 
         return conn;
     }
@@ -123,6 +134,7 @@ public class API {
 
         BufferedReader in;
         String inputLine;
+        System.out.println("Response code: " + conn.getResponseCode());
         if (conn.getResponseCode() / 100 == 2) {
             in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         } else {

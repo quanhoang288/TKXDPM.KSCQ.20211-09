@@ -12,6 +12,7 @@ public class Configs {
 
     public static final String DATABASE_NAME    =   "<database-name>";
     public static final String COLLECTION_NAME  =   "<collection-name>";
+    public static final String PROCESS_TRANSACTION_URL = "https://ecopark-system-api.herokuapp.com/api/card/processTransaction";
 
     public static final String BIKE_DETAIL_PATH = "/fxml/bike/bike-detail.fxml";
     public static final String DOCK_LIST_PATH = "/fxml/dock/dock-list.fxml";
