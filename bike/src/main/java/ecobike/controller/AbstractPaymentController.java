@@ -3,16 +3,20 @@ package ecobike.controller;
 import ecobike.controller.base.BaseController;
 import ecobike.entity.PaymentTransaction;
 import ecobike.subsystem.InterbankInterface;
+import ecobike.utils.MyMap;
 import ecobike.utils.PaymentObserver;
 import ecobike.utils.PaymentPublishser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class AbstractPaymentController extends BaseController implements PaymentPublishser {
     List<PaymentObserver> observers = new ArrayList<>();
 
     protected InterbankInterface interbank;
+    protected PaymentTransaction paymentTransaction;
+
     public void setInterbank(InterbankInterface interbank) {
         this.interbank = interbank;
     }
@@ -34,5 +38,12 @@ public abstract class AbstractPaymentController extends BaseController implement
             paymentObserver.update(transactions);
         }
     }
-    public abstract void performTransactions();
+    public abstract void performTransactions(HashMap<String, String> paymentInfo);
+
+    protected abstract void handleTransactionComplete(MyMap transactionResponse);
+
+
+    public PaymentTransaction getPaymentTransaction() {
+        return this.paymentTransaction;
+    }
 }
