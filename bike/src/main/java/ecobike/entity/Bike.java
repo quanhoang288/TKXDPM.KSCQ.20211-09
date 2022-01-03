@@ -1,5 +1,7 @@
 package ecobike.entity;
 
+import ecobike.repository.BikeRentalInfoRepo;
+import ecobike.security.Authentication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,4 +38,14 @@ public class Bike {
     @OneToMany(mappedBy = "bike")
     private List<BikeRentalInfo> rentedSession;
 
+    public boolean isBeingRented() {
+        boolean res = true;
+        String authenticatedUserId = Authentication.getInstance().getUserId();
+        try {
+            BikeRentalInfoRepo.findInProgressRentalInfo(authenticatedUserId, id);
+        } catch (NoResultException e) {
+            res = false;
+        }
+        return res;
+    }
 }

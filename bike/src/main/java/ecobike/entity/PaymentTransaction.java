@@ -10,6 +10,7 @@ import java.util.Date;
 @Entity
 @Builder
 @AllArgsConstructor
+@Getter
 
 public class PaymentTransaction {
     @Id
@@ -41,7 +42,9 @@ public class PaymentTransaction {
 
     }
 
-    public String getErrorCode() {
-        return errorCode;
-    }
+//    public BikeRentalInfo getBikeRentalInfo() { return bikeRentalInfo; }
+//
+//    public String getErrorCode() {
+//        return errorCode;
+//    }
 }

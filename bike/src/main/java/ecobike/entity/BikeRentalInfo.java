@@ -29,6 +29,9 @@ public class BikeRentalInfo {
     @Column(name = "endAt")
     private String endAt;
 
+    @Enumerated(EnumType.STRING)
+    private RENTALSTATUS status;
+
     @ManyToOne
     @JoinColumn(name = "bikeID")
     private Bike bike;
