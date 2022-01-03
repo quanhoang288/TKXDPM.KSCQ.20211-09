@@ -12,39 +12,26 @@ public class BikeRepo implements IBikeRepo {
     private static EntityManager entityManager = DbConnection.getEntityManager();
 
     public  List<Bike> getAllByDock(String dockId) {
-        entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.dock.id = :dockId");
         q.setParameter("dockId", dockId);
         List<Bike> bikes = (List<Bike>) q.getResultList();
-        entityManager.getTransaction().commit();
         return bikes;
     }
 
     public  List<Bike> getPagingByDock(int start, int count, String dockId) {
-        entityManager.getTransaction().begin();
         Query q = entityManager.createQuery("select b from  Bike b where b.dock.id = :dockId");
         q.setParameter("dockId", dockId);
-
-
         q.setFirstResult(start);
         q.setMaxResults(count);
         List<Bike> bikes = (List<Bike>) q.getResultList();
-        entityManager.getTransaction().commit();
+
         return bikes;
     }
 
-    public  Bike findById(String id) throws NoResultException {
-        entityManager.getTransaction().begin();
+    public Bike findById(String id) throws NoResultException {
         Query q = entityManager.createQuery("select b from  Bike b where b.id = :id");
         q.setParameter("id", id);
-        Bike bike = null;
-        try {
-            bike = (Bike) q.getSingleResult();
-        } catch (NoResultException e) {
-            throw e;
-        } finally {
-            entityManager.getTransaction().commit();
-        }
+        Bike bike = (Bike) q.getSingleResult();
 
         return bike;
     }
