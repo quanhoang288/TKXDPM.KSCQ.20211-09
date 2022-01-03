@@ -1,19 +1,14 @@
 package ecobike.view;
 
 import ecobike.common.exception.InvalidCardException;
-import ecobike.controller.base.BaseController;
-import ecobike.utils.Configs;
+import ecobike.common.exception.PaymentException;
+import ecobike.entity.PaymentTransaction;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ecobike.controller.AbstractPaymentController;
-import ecobike.controller.RentBikePaymentController;
-import ecobike.view.base.BaseScreenHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 import javafx.stage.Stage;
@@ -40,9 +35,11 @@ public class PaymentFormHandler extends BaseScreenHandler {
     @FXML
     private Button submitButton;
 
-    public PaymentFormHandler(Stage stage, String screenPath) throws IOException {
+    private ResultScreenHandler resultScreenHandler;
+
+    private PaymentFormHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        componentDidMount();
+
 //        submitButton.setOnMouseClicked(event -> {
 //            try {
 //                HashMap<String, String> paymentInfo = new HashMap<>();
@@ -70,10 +67,33 @@ public class PaymentFormHandler extends BaseScreenHandler {
 //        });
     }
 
+    public PaymentFormHandler(AbstractPaymentController paymentController, Stage stage, String screenPath) throws IOException {
+        this(stage, screenPath);
+        setBController(paymentController);
+        componentDidMount();
+    }
+
 
     private void componentDidMount(){
         submitButton.setOnMouseClicked((MouseEvent e) ->{
-            getBController().performTransactions();
+            HashMap<String, String> paymentInfo = new HashMap<>();
+            paymentInfo.put("cardHolder", cardHolder.getText());
+            paymentInfo.put("cardNumber", cardNumber.getText());
+            paymentInfo.put("expirationDate", expirationDate.getText());
+            paymentInfo.put("cvv", cvv.getText());
+            paymentInfo.put("desc", desc.getText());
+
+            System.out.println(paymentInfo);
+
+            try {
+                validateRequiredInput(paymentInfo);
+                getBController().performTransactions(paymentInfo);
+            } catch (PaymentException ex) {
+                PopupScreen.error(ex.getMessage());
+                return;
+            }
+
+            resultScreenHandler.displayResult(paymentInfo.get("cardHolder"));
         });
     }
 
@@ -84,9 +104,10 @@ public class PaymentFormHandler extends BaseScreenHandler {
         validationRules.put("cardNumber", "Card number field is required");
         validationRules.put("expirationDate", "Expiration date field is required");
         validationRules.put("cvv", "Security code field is required");
+//        validationRules.put("desc", "Description field is required");
 
         for (Map.Entry<String, String> rule : validationRules.entrySet()) {
-            if (inputs.get(rule.getKey()) == "") {
+            if (inputs.get(rule.getKey()).equals("")) {
                 errMsg += rule.getValue() + "\n";
             }
         }
@@ -98,4 +119,7 @@ public class PaymentFormHandler extends BaseScreenHandler {
         return (AbstractPaymentController) super.getBController();
     }
 
+    public void setResultScreenHandler(ResultScreenHandler resultScreenHandler) {
+        this.resultScreenHandler = resultScreenHandler;
+    }
 }

@@ -2,17 +2,14 @@ package ecobike.view.base;
 
 import java.io.IOException;
 import java.util.Hashtable;
-import java.util.List;
 
-import ecobike.controller.DockController;
+import ecobike.controller.DockListController;
 import ecobike.controller.ReturnBikeController;
 import ecobike.controller.base.BaseController;
 import ecobike.utils.Configs;
 import ecobike.view.BikeRentalInfoHandler;
 import ecobike.view.DockListHandler;
-import ecobike.view.RentBikeHandler;
 import ecobike.view.ReturnBikeHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 //import views.screen.home.HomeScreenHandler;
@@ -75,7 +72,7 @@ public class BaseScreenHandler<T extends BaseController> extends FXMLScreenHandl
 
     public void redirectToHome() throws IOException {
         DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
-        dockListHandler.setBController(new DockController());
+        dockListHandler.setBController(new DockListController());
         dockListHandler.initDockList();
         dockListHandler.setScreenTitle("Home Screen");
         dockListHandler.show();

@@ -1,5 +1,6 @@
 package ecobike.view;
 
+import ecobike.controller.BikeListController;
 import ecobike.controller.DockInfoController;
 import ecobike.controller.RentBikeController;
 import ecobike.repository.BikeRepo;
@@ -9,19 +10,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewDockHandler extends BaseScreenHandler<DockInfoController> {
-    public ViewDockHandler(Stage stage, String screenPath) throws IOException {
+public class DockInfoHandler extends BaseScreenHandler<DockInfoController> {
+    public DockInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
     }
 
     public void viewBikeList() throws IOException {
-        //TODO: init controller
-        RentBikeHandler rentBikeHandler = new RentBikeHandler(this.stage, Configs.RENT_BIKE_PATH);
-        rentBikeHandler.setPreviousScreen(this);
+        BikeListHandler bikeListHandler = new BikeListHandler(this.stage, Configs.RENT_BIKE_PATH);
+        bikeListHandler.setPreviousScreen(this);
 
-        rentBikeHandler.setBController(new RentBikeController(getBController().getDockId(), new BikeRepo()));
-        rentBikeHandler.initializeBikes();
-        rentBikeHandler.setScreenTitle("Bike List Screen");
-        rentBikeHandler.show();
+        bikeListHandler.setBController(new BikeListController(getBController().getDockId(), new BikeRepo()));
+        bikeListHandler.initializeBikes();
+        bikeListHandler.setScreenTitle("Bike List Screen");
+        bikeListHandler.show();
     }
 }

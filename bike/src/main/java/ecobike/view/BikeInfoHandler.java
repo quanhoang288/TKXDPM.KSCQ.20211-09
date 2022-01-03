@@ -1,11 +1,12 @@
 package ecobike.view;
 
+import ecobike.common.exception.BikeAlreadyRentedException;
+import ecobike.common.exception.UserAlreadyRentingException;
 import ecobike.controller.BikeInfoController;
-import ecobike.controller.RentBikePaymentController;
-import ecobike.controller.RentBikeResultController;
+import ecobike.controller.RentBikeController;
 import ecobike.entity.Bike;
 import ecobike.entity.PaymentTransaction;
-import ecobike.security.Authentication;
+import ecobike.subsystem.InterbankSubsystem;
 import ecobike.utils.Configs;
 import ecobike.utils.PaymentObserver;
 import ecobike.view.base.BaseScreenHandler;
@@ -22,6 +23,8 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> imple
 
     @FXML
     private Button rentBikeBtn;
+    @FXML
+    private Button backButton;
 
     @FXML
     private Label type;
@@ -30,10 +33,18 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> imple
     @FXML
     private Label batteryPercent;
 
-    public BikeInfoHandler(Stage stage, String screenPath) throws IOException {
+    private BikeInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        componentDidMount();
+
     }
+
+    public BikeInfoHandler(BikeInfoController bikeInfoController, Stage stage, String screenPath) throws IOException {
+        this(stage, screenPath);
+        super.setBController(bikeInfoController);
+        registerHandlers();
+        initializeInfo();
+    }
+
 
     public void initializeInfo() {
         BikeInfoController ctrl = getBController();
@@ -41,19 +52,29 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> imple
         type.setText(bike.getType());
         licensePlate.setText(bike.getLicensePlate());
         batteryPercent.setText(bike.getBatteryPercent() + "%");
-
-
     }
 
-    public void componentDidMount() {
-        rentBikeBtn.setOnMouseClicked((MouseEvent e) -> {
-            try {
-                PaymentFormHandler paymentFormHandler = new PaymentFormHandler(this.stage, Configs.PAYMENT_FORM_PATH);
-                RentBikePaymentController rentBikePaymentController = new RentBikePaymentController(100);
-                paymentFormHandler.setBController(rentBikePaymentController);
-                rentBikePaymentController.attach(this);
-                paymentFormHandler.show();
+    public void registerHandlers() {
+        backButton.setOnMouseClicked((MouseEvent e) -> {
+            getPreviousScreen().show();
+        });
 
+        rentBikeBtn.setOnMouseClicked((MouseEvent e) -> {
+            RentBikeController rentBikeController = null;
+            try {
+                rentBikeController = new RentBikeController(getBController().getBike());
+            } catch (BikeAlreadyRentedException | UserAlreadyRentingException ex) {
+                PopupScreen.error(ex.getMessage());
+                return;
+            }
+
+            rentBikeController.setInterbank(new InterbankSubsystem());
+            rentBikeController.attach(this);
+
+            try {
+                PaymentFormHandler paymentFormHandler = new PaymentFormHandler(rentBikeController, this.stage, Configs.PAYMENT_FORM_PATH);
+                paymentFormHandler.setResultScreenHandler(new RentBikeResultHandler(rentBikeController, this.stage, Configs.PAYMENT_RENT_SUCCESS_PATH));
+                paymentFormHandler.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -64,25 +85,25 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> imple
     @Override
     public void update(List<PaymentTransaction> transactions) {
         System.out.println("start session");
-        try {
-            RentBikeResultHandler rentBikeResultHandler = new RentBikeResultHandler(this.stage, Configs.PAYMENT_RENT_SUCCESS_PATH);
-            Bike bike = getBController().getBike();
-
-            RentBikeResultController rentBikeResultController = RentBikeResultController.builder()
-                    .bikeType(bike.getType())
-                    .cardHolderName("Holder ...")
-                    .bikeType(bike.getType())
-                    .dockName(bike.getDock().getName())
-                    .depositAmount("Get in transaction")
-                    .transactionDate("Get in transaction")
-                    .transactionId("Get in transaction")
-                    .build();
-
-            rentBikeResultHandler.setBController(rentBikeResultController);
-            rentBikeResultHandler.populateData();
-            rentBikeResultHandler.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            RentBikeResultHandler rentBikeResultHandler = new RentBikeResultHandler(this.stage, Configs.PAYMENT_RENT_SUCCESS_PATH);
+//            Bike bike = getBController().getBike();
+//
+//            RentBikeResultController rentBikeResultController = RentBikeResultController.builder()
+//                    .bikeType(bike.getType())
+//                    .cardHolderName("Holder ...")
+//                    .bikeType(bike.getType())
+//                    .dockName(bike.getDock().getName())
+//                    .depositAmount("Get in transaction")
+//                    .transactionDate("Get in transaction")
+//                    .transactionId("Get in transaction")
+//                    .build();
+//
+//            rentBikeResultHandler.setBController(rentBikeResultController);
+//            rentBikeResultHandler.populateData();
+//            rentBikeResultHandler.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

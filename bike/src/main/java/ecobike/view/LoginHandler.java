@@ -1,6 +1,6 @@
 package ecobike.view;
 
-import ecobike.controller.DockController;
+import ecobike.controller.DockListController;
 import ecobike.db.DbConnection;
 import ecobike.entity.User;
 import ecobike.security.Authentication;
@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import javax.persistence.EntityManager;
@@ -39,6 +38,9 @@ public class LoginHandler extends BaseScreenHandler {
         String username = this.username.getText();
         String password = this.password.getText();
         EntityManager em = DbConnection.getEntityManager();
+        em.getTransaction().begin();
+
+        System.out.println(username + ' ' + password);
 
         Query query = em.createQuery("select u from User u where u.name = :username and u.password = :password ");
         query.setParameter("username", username);
@@ -51,7 +53,7 @@ public class LoginHandler extends BaseScreenHandler {
             Authentication.createInstance(username, user.getId());
 
             DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
-            dockListHandler.setBController(new DockController());
+            dockListHandler.setBController(new DockListController());
             dockListHandler.setPreviousScreen(this);
             dockListHandler.initDockList();
             dockListHandler.show();
