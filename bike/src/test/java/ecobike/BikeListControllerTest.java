@@ -1,5 +1,6 @@
 package ecobike;
 
+import ecobike.controller.BikeListController;
 import ecobike.controller.RentBikeController;
 import ecobike.entity.Bike;
 import ecobike.repository.IBikeRepo;
@@ -36,20 +37,20 @@ class StubBarCodeConverter implements IBarcode {
     }
 }
 
-public class RentBikeControllerTest {
+public class BikeListControllerTest {
     @Test
     public void shouldPaginate() {
         IBikeRepo stubBikeRepo = new StubBikeRepo();
-        RentBikeController rentBikeController = new RentBikeController("1", stubBikeRepo);
-        List bike = rentBikeController.loadBikeFromDB(1,2 );
+        BikeListController bikeListController = new BikeListController("1", stubBikeRepo);
+        List bike = bikeListController.loadBikeFromDB(1,2 );
         assertEquals(bike.size(), 2);
     }
     @Test
     public void shouldConvertBarcode(){
         IBikeRepo stubBikeRepo = new StubBikeRepo();
-        RentBikeController rentBikeController = new RentBikeController("1", stubBikeRepo);
+        BikeListController bikeListController = new BikeListController("1", stubBikeRepo);
         String fakeBarCode = "123";
-        String convertedBarCode = rentBikeController.convertBarcodeToId(fakeBarCode);
+        String convertedBarCode = bikeListController.convertBarcodeToId(fakeBarCode);
         assertEquals(convertedBarCode, fakeBarCode);
     }
 }
