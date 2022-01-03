@@ -23,7 +23,7 @@ public class Configs {
     public static final String DOCK_DETAIL_PATH = "/fxml/dock/dock-detail.fxml";
     public static final String RENT_BIKE_PATH = "/fxml/rental/rent-bike.fxml";
     public static final String RENTAL_STATUS_PATH = "/fxml/rental/rental-status.fxml";
-    public static final String RETURN_BIKE_PATH = "/fxml/rental/return-bike.fxml";
+    public static final String RETURN_BIKE_PATH = "/fxml/rental/select-return-dock.fxml";
     public static final String PAYMENT_FORM_PATH = "/fxml/payment/payment-form.fxml";
     public static final String PAYMENT_FAILURE_PATH = "/fxml/payment/payment-failure.fxml";
     public static final String PAYMENT_SUCCESS_PATH = "/fxml/payment/payment-success.fxml";

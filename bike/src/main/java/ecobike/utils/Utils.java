@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,6 +42,18 @@ public class Utils {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
+    }
+
+    /**
+     * Parse a date string and convert to a date object
+     *
+     * @param date String to be formatted
+     * @return formatted date as {@link java.util.Date}
+     * @throws ParseException
+     */
+    public static Date parseDateString(String date) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.parse(date);
     }
 
     /**

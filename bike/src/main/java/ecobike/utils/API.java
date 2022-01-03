@@ -57,16 +57,11 @@ public class API {
     public static String post(String url, String data, String token) throws IOException {
         allowMethods("PATCH");
 
-        LOGGER.info("Creating connection " + "\n");
-
         HttpURLConnection conn = setupConnection(url, "PATCH", token);
-        LOGGER.info("Connection: " + conn);
         Writer writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
         writer.write(data);
         writer.close();
-        LOGGER.info("Reading server response");
         return readResponse(conn);
-
     }
 
     /**
