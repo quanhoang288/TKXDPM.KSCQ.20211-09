@@ -11,6 +11,7 @@ import ecobike.repository.PaymentTransactionRepo;
 import ecobike.repository.UserRepo;
 import ecobike.security.Authentication;
 import ecobike.utils.MyMap;
+import ecobike.utils.StopWatch;
 import ecobike.utils.Utils;
 
 import javax.persistence.NoResultException;
@@ -57,7 +58,7 @@ public class RentBikeController extends AbstractPaymentController{
         String userId = Authentication.getInstance().getUserId();
         User user = UserRepo.findById(userId);
 
-        BikeRentalInfo rentalInfo = BikeRentalInfoRepo.create(user, bike, Utils.getToday());
+        BikeRentalInfo rentalInfo = BikeRentalInfoRepo.create(user, bike, createdAt);
 
         PaymentTransaction paymentTransaction = PaymentTransactionRepo.create(
             (String)transactionResponse.get("content"),
@@ -67,7 +68,7 @@ public class RentBikeController extends AbstractPaymentController{
             rentalInfo
         );
 
-        // todo: start the stop watch
+        StopWatch.getInstance().start();
 
         this.paymentTransaction = paymentTransaction;
     }

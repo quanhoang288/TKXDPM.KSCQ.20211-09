@@ -1,30 +1,36 @@
 package ecobike.controller;
 
+import ecobike.common.exception.UserNotRentingException;
 import ecobike.controller.base.BaseController;
-import ecobike.session.RentingSession;
-import ecobike.utils.Configs;
+import ecobike.entity.BikeRentalInfo;
+import ecobike.entity.User;
+import ecobike.repository.BikeRentalInfoRepo;
+import ecobike.security.Authentication;
+import ecobike.utils.StopWatch;
 
 public class RentalInfoController extends BaseController {
 
-    public static double calculateAmountToPay(int time) {
-        System.out.println("Renting time: " + time + "s");
-        double dTime = (double) time;
-        if (dTime <= 60) {
-            return 0;
-        }
+    private BikeRentalInfo rentalInfo;
 
-        double amount = 10000;
-        dTime -= 30 * 60;
-        if (dTime > 0) {
-            amount += 3000 * Math.ceil(dTime / (2 * 60));
+    public RentalInfoController() {
+        if (!Authentication.isAlreadyRenting()) {
+            throw new UserNotRentingException();
         }
+        initializeRentalInfo();
+    }
 
-        String bikeType = RentingSession.getCurrentRentedBikeType();
-        if (bikeType == Configs.BIKE_TYPES[1] || bikeType == Configs.BIKE_TYPES[2]) {
-            amount *= 1.5;
-        }
 
-        return amount;
+    public BikeRentalInfo getRentalInfo() {
+        return rentalInfo;
+    }
+
+    private void initializeRentalInfo() {
+        String userId = Authentication.getInstance().getUserId();
+        this.rentalInfo = BikeRentalInfoRepo.findInProgressByUserId(userId);
+    }
+
+    public int calculateAmountToPay(int time) {
+        return rentalInfo.calculateRentalFee(time);
     }
 
     public void requestToReturnBike() {

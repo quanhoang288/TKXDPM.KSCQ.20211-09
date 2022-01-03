@@ -9,6 +9,7 @@ import ecobike.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 public class UserRepo {

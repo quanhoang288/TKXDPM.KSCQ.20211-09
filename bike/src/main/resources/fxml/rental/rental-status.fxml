@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -23,22 +22,22 @@
                         <Font name="Segoe UI" size="36.0" />
                      </font>
                   </Label>
-                  <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Home" onMouseClicked="#redirectToHome">
+                  <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#redirectToHome" prefHeight="43.0" prefWidth="175.0" text="Home">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="39.0" layoutY="249.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike" onMouseClicked="#redirectToRentBike">
+                  <Button layoutX="39.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#redirectToRentBike" prefHeight="43.0" prefWidth="175.0" text="Rent a bike">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="42.0" layoutY="398.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike" onMouseClicked="#redirectToReturnBike">
+                  <Button layoutX="42.0" layoutY="398.0" mnemonicParsing="false" onMouseClicked="#redirectToReturnBike" prefHeight="43.0" prefWidth="175.0" text="Return bike">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="42.0" layoutY="551.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="View rental status" onMouseClicked="#redirectToRentalInfo">
+                  <Button layoutX="42.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#redirectToRentalInfo" prefHeight="43.0" prefWidth="175.0" text="View rental status">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -47,22 +46,17 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Button layoutX="479.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Return bike">
+                  <Button layoutX="479.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Return bike" onMouseClicked="#requestToReturnBike">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button layoutX="700.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Pause renting" onMouseClicked="#pauseRentalTime">
+                  <Button layoutX="700.0" layoutY="631.0" mnemonicParsing="false" onMouseClicked="#pauseRentalTime" prefHeight="39.0" prefWidth="148.0" text="Pause renting">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
 
-                  <Button layoutX="900.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Cancel renting" onMouseClicked="#cancelRentalTime">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                   <GridPane layoutX="78.0" layoutY="100.0" prefHeight="472.0" prefWidth="950.0" style="-fx-background-color: #eeeeee;">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -95,12 +89,12 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <TextField editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="Standard bike" GridPane.columnIndex="1">
+                        <TextField fx:id="bikeType" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="Standard bike" GridPane.columnIndex="1">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="rentingTimeText" editable="false" prefHeight="73.0" prefWidth="440.0" style="-fx-alignment: center;" text="02:30:15" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="rentingTimeText" editable="false" prefHeight="73.0" prefWidth="440.0" style="-fx-alignment: center;" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -110,7 +104,7 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="80%" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <TextField fx:id="batteryPercent" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="80%" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="24.0" />
                            </font>

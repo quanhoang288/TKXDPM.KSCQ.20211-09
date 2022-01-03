@@ -2,13 +2,44 @@ package ecobike.utils;
 
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StopWatch extends ScheduledService {
     private int elapsedTimeInSecond;
     private boolean isPaused;
+    List<StopWatchObserver> observers = new ArrayList<>();
+    private static StopWatch instance;
 
-    public StopWatch() {
+    private StopWatch() {
+        setPeriod(Duration.seconds(1));
+        setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                notifyObservers((Integer) event.getSource().getValue());
+            }
+        });
+    }
 
+    public static StopWatch getInstance() {
+        if (instance == null) {
+            instance = new StopWatch();
+        }
+        return instance;
+    }
+
+    public void attach(StopWatchObserver observer) {
+        observers.add(observer);
+    }
+
+    public void notifyObservers(int time) {
+        for (StopWatchObserver observer: observers) {
+            observer.update(time);
+        }
     }
 
     @Override
@@ -16,8 +47,8 @@ public class StopWatch extends ScheduledService {
         return new Task() {
             @Override
             protected Integer call() throws Exception {
-                incrementElapsedTime();
-                return getElapsedTimeInSecond();
+            incrementElapsedTime();
+            return getElapsedTimeInSecond();
             }
         };
     }
@@ -26,6 +57,13 @@ public class StopWatch extends ScheduledService {
     public boolean cancel() {
         this.isPaused = false;
         return super.cancel();
+    }
+
+
+
+    public void startAt(int startTime) {
+        this.elapsedTimeInSecond = startTime;
+        start();
     }
 
     public void pause() {
