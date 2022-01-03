@@ -3,19 +3,19 @@ package ecobike.entity;
 import ecobike.common.exception.InvalidCardException;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class CreditCard {
     private String cardCode;
     private String owner;
-    private int cvvCode;
+    private String cvvCode;
     private String dateExpired;
 
-    public CreditCard(String cardCode, String owner, int cvvCode, String dateExpired) {
-        super();
-        this.cardCode = cardCode;
-        this.owner = owner;
-        this.cvvCode = cvvCode;
-        this.dateExpired = dateExpired;
+    public CreditCard(HashMap<String, String> paymentInfo) throws InvalidCardException{
+        this.cardCode = paymentInfo.get("cardNumber");
+        this.owner = paymentInfo.get("cardHolder");
+        this.cvvCode = paymentInfo.get("cvv");
+        this.dateExpired = getExpirationDate(paymentInfo.get("expirationDate"));
     }
 
     public String getCardCode() {
@@ -26,7 +26,7 @@ public class CreditCard {
         return owner;
     }
 
-    public int getCvvCode() {
+    public String getCvvCode() {
         return cvvCode;
     }
 
@@ -34,7 +34,7 @@ public class CreditCard {
         return dateExpired;
     }
 
-    public static String getExpirationDate(String date) throws InvalidCardException {
+    private String getExpirationDate(String date) throws InvalidCardException {
         String[] strs = date.split("/");
         if (strs.length != 2) {
             throw new InvalidCardException();

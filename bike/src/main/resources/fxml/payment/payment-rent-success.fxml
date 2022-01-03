@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane prefHeight="768.0" prefWidth="1366.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="678.0" minWidth="10.0" prefWidth="206.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1113.0" minWidth="10.0" prefWidth="1072.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Pane prefHeight="786.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <Label layoutX="43.0" layoutY="25.0" text="Ecobike" textAlignment="CENTER" textFill="#57e46e">
+                     <font>
+                        <Font name="Segoe UI" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="17.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#redirectToHome" prefHeight="43.0" prefWidth="175.0" text="Home">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="245.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Rent a bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="385.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="175.0" text="Return bike">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="17.0" layoutY="539.0" mnemonicParsing="false" onMouseClicked="#redirectToRentalInfo" prefHeight="43.0" prefWidth="175.0" text="View rental status">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1121.0" GridPane.columnIndex="1">
+               <children>
+                  <Pane layoutX="1.0" prefHeight="791.0" prefWidth="1070.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" layoutX="125.0" layoutY="127.0" prefHeight="58.0" prefWidth="593.0" text="Successful " textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="48.0" />
+                           </font>
+                        </Label>
+                        <GridPane gridLinesVisible="true" layoutX="125.0" layoutY="270.0" prefHeight="373.0" prefWidth="820.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Transaction ID">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="transactionId" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="VADX23023DS" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Cardholder name" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Renting dock station" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Bike type" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deposit" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Deposit amount" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Transaction date" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="transactionDate" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="09-10-2021 19:15:39" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="cardHolder" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="NGUYEN VAN A" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dock" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Ecopark ABC" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="bikeType" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="Standard" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="deposit" alignment="CENTER" prefHeight="125.0" prefWidth="413.0" text="400,000" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Button fx:id="back" layoutX="467.0" layoutY="706.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="136.0" text="Back to home">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="70.0" fitWidth="57.0" layoutX="507.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/check.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="125.0" layoutY="197.0" prefHeight="50.0" prefWidth="580.0" text="You have successfully rent a bike. Thanks for using our service!">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

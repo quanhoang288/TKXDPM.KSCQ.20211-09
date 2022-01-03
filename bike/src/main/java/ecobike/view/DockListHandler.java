@@ -1,6 +1,8 @@
 package ecobike.view;
 
-import ecobike.controller.PaymentController;
+import ecobike.controller.DockListController;
+import ecobike.controller.DockInfoController;
+import ecobike.entity.Dock;
 import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
@@ -8,35 +10,37 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class DockListHandler extends BaseScreenHandler {
-    private String[] dockList = {"Dock 1", "Dock 2", "Dock 3", "Dock 4", "Dock 5", "Dock 6"};
+public class DockListHandler extends BaseScreenHandler<DockListController> {
 
+
+    private List<Dock> docks;
     @FXML
     private ListView dockListView;
 
     public DockListHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        this.initDockList();
     }
 
-    private void initDockList() {
-        this.dockListView.getItems().addAll(dockList);
+    public void initDockList() {
+        DockListController dockListController = getBController();
+        List<Dock> docks = dockListController.findAll();
+        this.docks = docks;
+        this.dockListView.getItems().addAll(docks.stream().map((Dock dock) -> dock.getAddress()).collect(Collectors.toList()));
     }
 
     @FXML
     public void viewDockDetail() throws IOException {
         //TODO: initialize controller for dock detail handler
 
-//        BaseScreenHandler dockDetailHandler = new ViewDockHandler(this.stage, Configs.DOCK_DETAIL_PATH);
-//        dockDetailHandler.setPreviousScreen(this);
-//        dockDetailHandler.setScreenTitle("Dock Detail Screen");
-//        dockDetailHandler.show();
+        int selectedItem = dockListView.getSelectionModel().getSelectedIndex();
+        BaseScreenHandler dockDetailHandler = new DockInfoHandler(this.stage, Configs.DOCK_DETAIL_PATH);
+        dockDetailHandler.setBController(new DockInfoController(docks.get(selectedItem).getId()));
+        dockDetailHandler.setPreviousScreen(this);
+        dockDetailHandler.setScreenTitle("Dock Detail Screen");
+        dockDetailHandler.show();
 
-        BaseScreenHandler paymentFormHandler = new PaymentFormHandler(this.stage, Configs.PAYMENT_FORM_PATH);
-        paymentFormHandler.setPreviousScreen(this);
-        paymentFormHandler.setBController(new PaymentController());
-        paymentFormHandler.setScreenTitle("Dock Detail Screen");
-        paymentFormHandler.show();
     }
 }

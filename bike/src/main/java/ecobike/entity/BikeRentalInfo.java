@@ -1,16 +1,20 @@
 package ecobike.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Builder
+@Getter
 public class BikeRentalInfo {
 
     @Id
@@ -25,6 +29,9 @@ public class BikeRentalInfo {
     @Column(name = "endAt")
     private String endAt;
 
+    @Enumerated(EnumType.STRING)
+    private RENTALSTATUS status;
+
     @ManyToOne
     @JoinColumn(name = "bikeID")
     private Bike bike;
@@ -32,6 +39,15 @@ public class BikeRentalInfo {
     @JoinColumn(name = "userID")
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bikeRentalInfoId")
+    private List<PaymentTransaction> transactions;
+
+
+    public void addTransaction(PaymentTransaction paymentTransaction) {
+        if (transactions == null) transactions = new ArrayList<>();
+        transactions.add(paymentTransaction);
+    }
 
 
 }

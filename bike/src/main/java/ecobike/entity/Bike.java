@@ -1,7 +1,10 @@
 package ecobike.entity;
 
+import ecobike.repository.BikeRentalInfoRepo;
+import ecobike.security.Authentication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class Bike {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -25,14 +29,23 @@ public class Bike {
     @Column(name = "licensePlate")
     private String licensePlate;
     @Column(name = "batteryPercent")
-    private String batteryPercent;
+    private int batteryPercent;
     @Column(name = "value")
-    private String value;
+    private int value;
     @ManyToOne
     @JoinColumn(name = "dockID")
     private Dock dock;
     @OneToMany(mappedBy = "bike")
     private List<BikeRentalInfo> rentedSession;
 
-
+    public boolean isBeingRented() {
+        boolean res = true;
+        String authenticatedUserId = Authentication.getInstance().getUserId();
+        try {
+            BikeRentalInfoRepo.findInProgressRentalInfo(authenticatedUserId, id);
+        } catch (NoResultException e) {
+            res = false;
+        }
+        return res;
+    }
 }

@@ -5,6 +5,7 @@ import ecobike.common.exception.UnrecognizedException;
 import ecobike.entity.CreditCard;
 import ecobike.entity.PaymentTransaction;
 import ecobike.subsystem.interbank.InterbankSubsystemController;
+import ecobike.utils.MyMap;
 
 public class InterbankSubsystem implements InterbankInterface {
 
@@ -15,14 +16,15 @@ public class InterbankSubsystem implements InterbankInterface {
     }
 
     @Override
-    public PaymentTransaction performPayment(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
-        PaymentTransaction transaction = ctrl.performPayment(card, amount, contents);
-        return transaction;
+    public MyMap performPayment(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
+        MyMap response = ctrl.performPayment(card, amount, contents);
+        return response;
     }
 
     @Override
-    public PaymentTransaction performRefund(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
-        PaymentTransaction transaction = ctrl.performRefund(card, amount, contents);
-        return transaction;
+    public MyMap performRefund(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
+        return null;
+//        PaymentTransaction transaction = ctrl.performRefund(card, amount, contents);
+//        return transaction;
     }
 }

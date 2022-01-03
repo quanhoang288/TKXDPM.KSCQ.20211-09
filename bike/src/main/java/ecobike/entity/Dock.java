@@ -25,7 +25,7 @@ public class Dock {
     private String id;
     private String name;
     private String address;
-    private String area;
+    private double area;
     private int capacity;
     @OneToMany(mappedBy = "dock")
     private List<Bike> bikes;

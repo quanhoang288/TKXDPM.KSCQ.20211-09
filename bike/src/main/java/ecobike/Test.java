@@ -12,10 +12,12 @@ public class Test {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        Dock dock = Dock.builder().address("HUSTI").area("HAIBATRUNG").capacity(20).name("DOCK XE MAY").build();
-
-        entityManager.persist(dock);
+        for (int i = 1; i < 10; i++) {
+            Dock dock = Dock.builder().address("Address " + i).area(10000).capacity(100).name("Dock " + i).build();
+            entityManager.persist(dock);
+        }
         entityManager.getTransaction().commit();
+
     }
 
 

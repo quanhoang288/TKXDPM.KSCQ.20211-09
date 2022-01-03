@@ -18,11 +18,11 @@ public class InterbankSubsystemController {
 
     private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
-    public PaymentTransaction performRefund(CreditCard card, int amount, String contents) {
+    public MyMap performRefund(CreditCard card, int amount, String contents) {
         return null;
     }
 
-    public PaymentTransaction performPayment(CreditCard card, int amount, String contents) {
+    public MyMap performPayment(CreditCard card, int amount, String contents) throws PaymentException{
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -40,13 +40,19 @@ public class InterbankSubsystemController {
         requestMap.put("version", VERSION);
         requestMap.put("transaction", transaction);
         requestMap.put("appCode", PUBLIC_KEY);
+
         requestMap.put("hashCode", Utils.md5(((MyMap) requestMap).toJSON()));
         requestMap.remove("secretKey");
 
+        System.out.println("REQUEST JSON: " + ((MyMap) requestMap).toJSON());
 
-        System.out.println("REQUEST BODY: " + requestMap);
         String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, ((MyMap) requestMap).toJSON());
         System.out.println("RESPONSE: " + responseText);
+
+        return processResponse(responseText);
+    }
+
+    private MyMap processResponse(String responseText) {
         MyMap response = null;
         try {
             response = MyMap.toMyMap(responseText, 0);
@@ -55,20 +61,9 @@ public class InterbankSubsystemController {
             throw new UnrecognizedException();
         }
 
-        return makePaymentTransaction(response);
-    }
+        String errCode = (String)  response.get("errorCode");
 
-    private PaymentTransaction makePaymentTransaction(MyMap response) {
-        if (response == null)
-            return null;
-        MyMap transaction = (MyMap) response.get("transaction");
-        CreditCard card = new CreditCard((String) transaction.get("cardCode"), (String) transaction.get("owner"),
-                Integer.parseInt((String) transaction.get("cvvCode")), (String) transaction.get("dateExpired"));
-        PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"),
-                (String) transaction.get("transactionId"), (String) transaction.get("transactionContent"),
-                Integer.parseInt((String) transaction.get("amount")));
-
-        switch (trans.getErrorCode()) {
+        switch (errCode) {
             case "00":
                 break;
             case "01":
@@ -89,6 +84,40 @@ public class InterbankSubsystemController {
                 throw new UnrecognizedException();
         }
 
-        return trans;
+        return (MyMap) response.get("transaction");
     }
+
+//    private PaymentTransaction makePaymentTransaction(MyMap response) {
+//
+//        if (response == null)
+//            return null;
+//        MyMap transaction = (MyMap) response.get("transaction");
+//
+//        PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"),
+//                (String) transaction.get("transactionId"), (String) transaction.get("transactionContent"),
+//                Integer.parseInt((String) transaction.get("amount")));
+//
+//        switch (trans.getErrorCode()) {
+//            case "00":
+//                break;
+//            case "01":
+//                throw new InvalidCardException();
+//            case "02":
+//                throw new NotEnoughBalanceException();
+//            case "03":
+//                throw new InternalServerErrorException();
+//            case "04":
+//                throw new SuspiciousTransactionException();
+//            case "05":
+//                throw new NotEnoughTransactionInfoException();
+//            case "06":
+//                throw new InvalidVersionException();
+//            case "07":
+//                throw new InvalidTransactionAmountException();
+//            default:
+//                throw new UnrecognizedException();
+//        }
+//
+//        return trans;
+//    }
 }
