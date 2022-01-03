@@ -1,5 +1,6 @@
 package ecobike.security;
 
+import ecobike.repository.UserRepo;
 import lombok.Getter;
 
 
@@ -30,6 +31,10 @@ public class Authentication {
             authenticationInstance = new Authentication(username, userId);
         }
         return authenticationInstance;
+    }
+
+    public static boolean isAlreadyRenting() {
+        return UserRepo.isRentingBike(authenticationInstance.getUserId());
     }
 
     private static void clearSession() {
