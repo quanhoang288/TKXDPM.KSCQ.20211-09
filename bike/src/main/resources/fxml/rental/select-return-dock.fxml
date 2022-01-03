@@ -53,7 +53,7 @@
                      </font>
                   </Button>
                   <ListView fx:id="dockListView" layoutX="51.0" layoutY="104.0" prefHeight="550.0" prefWidth="936.0" />
-                  <Button layoutX="458.0" layoutY="682.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Return bike" onMouseClicked="#selectDock">
+                  <Button layoutX="458.0" layoutY="682.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Return bike" onMouseClicked="#requestToReturnBike">
                      <font>
                         <Font size="18.0" />
                      </font>

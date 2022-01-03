@@ -15,5 +15,4 @@ public class DbConnection {
         }
         return entityManager;
     }
-
 }

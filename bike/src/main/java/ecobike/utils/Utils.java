@@ -7,7 +7,9 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -80,6 +82,40 @@ public class Utils {
             digest = "";
         }
         return digest;
+    }
+
+    /**
+     * format the display of the stop watch in format hh:mm:ss
+     * @param elapsedTimeInSeconds elapsed time in seconds
+     * @return formatString - formatted string
+     */
+    public static String formatTimerDisplay(int elapsedTimeInSeconds) {
+        String formatString = "";
+        List<String> parts = new ArrayList<>();
+
+        while (elapsedTimeInSeconds > 0) {
+            int mod = elapsedTimeInSeconds % 60;
+            if (mod < 10) {
+                parts.add("0" + mod);
+            } else {
+                parts.add("" + mod);
+            }
+            elapsedTimeInSeconds /= 60;
+        }
+
+        if (parts.size() < 3) {
+            formatString += "00:";
+            if (parts.size() < 2) {
+                formatString += "00:";
+            }
+        }
+
+        for (int i = parts.size() - 1; i > 0; i--) {
+            formatString += parts.get(i) + ":";
+        }
+        formatString += parts.get(0);
+
+        return formatString;
     }
 
 }

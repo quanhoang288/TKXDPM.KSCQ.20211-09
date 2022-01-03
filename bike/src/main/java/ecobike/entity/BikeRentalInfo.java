@@ -1,20 +1,21 @@
 package ecobike.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import ecobike.db.DbConnection;
+import ecobike.utils.Configs;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class BikeRentalInfo {
 
     @Id
@@ -24,10 +25,15 @@ public class BikeRentalInfo {
             strategy = "uuid2"
     )
     private String id;
+
     @Column(name = "startAt")
-    private String startAt;
-    @Column(name = "endAt")
-    private String endAt;
+    private Date startAt;
+
+    @Column(name = "durationInSeconds")
+    private int durationInSeconds;
+
+    @Column(name = "resumeAt")
+    private Date resumeAt;
 
     @Enumerated(EnumType.STRING)
     private RENTALSTATUS status;
@@ -47,6 +53,32 @@ public class BikeRentalInfo {
     public void addTransaction(PaymentTransaction paymentTransaction) {
         if (transactions == null) transactions = new ArrayList<>();
         transactions.add(paymentTransaction);
+    }
+
+    public int calculateRentalFee(int time) {
+        System.out.println("Calculating rental fee");
+        double dTime = time;
+        if (dTime <= 60) {
+            return 0;
+        }
+
+        double amount = 10000;
+        dTime -= 30 * 60;
+        if (dTime > 0) {
+            amount += 3000 * Math.ceil(dTime / (2 * 60));
+        }
+
+        if (bike.getType() == BIKETYPE.STANDARD_E_BIKE || bike.getType() == BIKETYPE.TWIN_BIKE) amount *= 1.5;
+
+        return (int) amount;
+    }
+
+    public void updateStatus(RENTALSTATUS status, int durationInSeconds) {
+        EntityManager em = DbConnection.getEntityManager();
+        em.getTransaction().begin();
+        setStatus(status);
+        setDurationInSeconds(durationInSeconds);
+        em.getTransaction().commit();
     }
 
 

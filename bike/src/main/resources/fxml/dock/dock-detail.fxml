@@ -79,17 +79,17 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="Ecopark ABC" GridPane.columnIndex="1">
+                        <Label fx:id="nameText" alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="Ecopark ABC" GridPane.columnIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="Hưng Yên" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="addressText" alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="Hưng Yên" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="1000m2" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="areaText" alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="1000m2" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -99,7 +99,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="50" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="numBikesText" alignment="CENTER" prefHeight="47.0" prefWidth="357.0" text="50" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="18.0" />
                            </font>

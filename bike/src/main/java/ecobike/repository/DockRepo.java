@@ -16,6 +16,14 @@ public class DockRepo {
         return docks;
     }
 
+    public static Dock findById(String id) {
+        Query q = entityManager.createQuery("select d from  Dock d where d.id = :id");
+        q.setParameter("id", id);
+        Dock dock = (Dock) q.getSingleResult();
+        return dock;
+    }
+
+
     public static boolean checkDockFull(Dock dock) {
         Query bikeBeingRentedCountQuery = entityManager.createQuery("select count(bri) from BikeRentalInfo bri inner join Bike b on bri.endAt is null and b.dock = :dock");
 

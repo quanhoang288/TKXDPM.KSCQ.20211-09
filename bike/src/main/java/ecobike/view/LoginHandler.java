@@ -3,8 +3,12 @@ package ecobike.view;
 import ecobike.controller.DockListController;
 import ecobike.db.DbConnection;
 import ecobike.entity.User;
+import ecobike.repository.BikeRentalInfoRepo;
+import ecobike.repository.UserRepo;
 import ecobike.security.Authentication;
 import ecobike.utils.Configs;
+import ecobike.utils.StopWatch;
+import ecobike.utils.Utils;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class LoginHandler extends BaseScreenHandler {
 
@@ -38,19 +43,22 @@ public class LoginHandler extends BaseScreenHandler {
         String username = this.username.getText();
         String password = this.password.getText();
         EntityManager em = DbConnection.getEntityManager();
-        em.getTransaction().begin();
 
-        System.out.println(username + ' ' + password);
 
         Query query = em.createQuery("select u from User u where u.name = :username and u.password = :password ");
         query.setParameter("username", username);
         query.setParameter("password", password);
         try {
             User user = (User) query.getSingleResult();
-            System.out.println(user);
 
             //set principle
             Authentication.createInstance(username, user.getId());
+
+            if (Authentication.isAlreadyRenting()) {
+                // update latest duration for realtime stopwatch
+                int latestDuration = BikeRentalInfoRepo.updateLatestDuration(user.getId());
+                StopWatch.getInstance().startAt(latestDuration);
+            }
 
             DockListHandler dockListHandler = new DockListHandler(this.stage, Configs.DOCK_LIST_PATH);
             dockListHandler.setBController(new DockListController());

@@ -1,15 +1,17 @@
 package ecobike.controller;
 
 import ecobike.controller.base.BaseController;
+import ecobike.entity.Dock;
+import ecobike.repository.DockRepo;
 
 public class DockInfoController extends BaseController {
-    String dockId;
+    private Dock dock;
 
-    public DockInfoController(String dockId) {
-        this.dockId = dockId;
+    public DockInfoController(Dock dock) {
+        this.dock = dock;
     }
 
-    public String getDockId() {
-        return dockId;
+    public Dock getDock() {
+        return this.dock;
     }
 }

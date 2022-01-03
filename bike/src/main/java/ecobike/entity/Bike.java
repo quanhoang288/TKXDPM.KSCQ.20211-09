@@ -1,11 +1,9 @@
 package ecobike.entity;
 
+import ecobike.db.DbConnection;
 import ecobike.repository.BikeRentalInfoRepo;
 import ecobike.security.Authentication;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class Bike {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -24,8 +22,8 @@ public class Bike {
             strategy = "uuid2"
     )
     private String  id;
-    @Column(name = "type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private BIKETYPE type;
     @Column(name = "licensePlate")
     private String licensePlate;
     @Column(name = "batteryPercent")
@@ -47,5 +45,23 @@ public class Bike {
             res = false;
         }
         return res;
+    }
+
+    public void moveToNewDock(Dock selectedDock) {
+        EntityManager em = DbConnection.getEntityManager();
+
+        // remove bike from old dock
+        Dock oldDock = dock;
+        List<Bike> oldDockBikeList = oldDock.getBikes();
+        oldDockBikeList.remove(this);
+
+        em.getTransaction().begin();
+        setDock(selectedDock);
+        oldDock.setBikes(oldDockBikeList);
+        em.getTransaction().commit();
+    }
+
+    public int getDepositAmount() {
+        return (int) (value * 0.4);
     }
 }

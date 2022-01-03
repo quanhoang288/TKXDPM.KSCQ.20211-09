@@ -39,32 +39,6 @@ public class PaymentFormHandler extends BaseScreenHandler {
 
     private PaymentFormHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-
-//        submitButton.setOnMouseClicked(event -> {
-//            try {
-//                HashMap<String, String> paymentInfo = new HashMap<>();
-//
-//                paymentInfo.put("cardHolder", cardHolder.getText());
-//                paymentInfo.put("cardNumber", cardNumber.getText());
-//                paymentInfo.put("instructions", issuingBank.getText());
-//                paymentInfo.put("expirationDate", expirationDate.getText());
-//                paymentInfo.put("cvv", cvv.getText());
-//                paymentInfo.put("desc", desc.getText());
-//
-//                validateRequiredInput(paymentInfo);
-//            } catch (InvalidCardException e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//            try {
-//                confirmToRentBike();
-//                BaseScreenHandler resultScreenHandler = new ResultScreenHandler(this.stage, Configs.PAYMENT_SUCCESS_PATH);
-//                resultScreenHandler.setPreviousScreen(this);
-//                resultScreenHandler.show();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
     }
 
     public PaymentFormHandler(AbstractPaymentController paymentController, Stage stage, String screenPath) throws IOException {

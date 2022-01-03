@@ -34,10 +34,9 @@ public class DockListHandler extends BaseScreenHandler<DockListController> {
     @FXML
     public void viewDockDetail() throws IOException {
         //TODO: initialize controller for dock detail handler
-
         int selectedItem = dockListView.getSelectionModel().getSelectedIndex();
-        BaseScreenHandler dockDetailHandler = new DockInfoHandler(this.stage, Configs.DOCK_DETAIL_PATH);
-        dockDetailHandler.setBController(new DockInfoController(docks.get(selectedItem).getId()));
+        DockInfoController dockInfoController = new DockInfoController(docks.get(selectedItem));
+        BaseScreenHandler dockDetailHandler = new DockInfoHandler(dockInfoController, this.stage, Configs.DOCK_DETAIL_PATH);
         dockDetailHandler.setPreviousScreen(this);
         dockDetailHandler.setScreenTitle("Dock Detail Screen");
         dockDetailHandler.show();
