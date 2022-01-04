@@ -23,8 +23,7 @@ public class InterbankSubsystem implements InterbankInterface {
 
     @Override
     public MyMap performRefund(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
-        return null;
-//        PaymentTransaction transaction = ctrl.performRefund(card, amount, contents);
-//        return transaction;
+        MyMap response = ctrl.performRefund(card, amount, contents);
+        return response;
     }
 }
