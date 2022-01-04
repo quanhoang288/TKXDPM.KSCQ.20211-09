@@ -38,7 +38,7 @@ public class DockBikeSeeder {
                 int batterPercent = r.nextInt(101);
                 int value = r.nextInt(1000000);
 
-                Bike bike = Bike.builder().dock(dock).type(BIKETYPE.STANDARD_BIKE).licensePlate(licensePlate).batteryPercent(batterPercent).value(value).build();
+                Bike bike = Bike.builder().dock(dock).type(BIKETYPE.values()[new Random().nextInt(BIKETYPE.values().length)]).licensePlate(licensePlate).batteryPercent(batterPercent).value(value).build();
                 entityManager.persist(bike);
             }
         }
