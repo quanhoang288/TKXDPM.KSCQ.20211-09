@@ -1,5 +1,5 @@
 package ecobike.utils;
 
 public interface StopWatchObserver {
-    public void update(int time);
+    void update(int time);
 }

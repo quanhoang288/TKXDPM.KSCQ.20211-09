@@ -31,6 +31,10 @@ public class Dock {
     @OneToMany(mappedBy = "dock")
     private List<Bike> bikes;
 
+    /**
+     * Check if dock is currently full or not
+     * @return
+     */
     public boolean isFull() {
         EntityManager em = DbConnection.getEntityManager();
         Query bikeBeingRentedCountQuery = em.createQuery("select count(bri) from BikeRentalInfo bri inner join Bike b on bri.status is :status and b.dock = :dock");

@@ -2,7 +2,6 @@ package ecobike.view;
 
 import ecobike.controller.DockListController;
 import ecobike.controller.RentBikeController;
-import ecobike.controller.RentBikeResultController;
 import ecobike.entity.PaymentTransaction;
 import ecobike.utils.Configs;
 import ecobike.utils.Utils;

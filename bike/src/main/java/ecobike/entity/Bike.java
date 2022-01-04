@@ -36,6 +36,10 @@ public class Bike {
     @OneToMany(mappedBy = "bike")
     private List<BikeRentalInfo> rentedSession;
 
+    /**
+     * Check if bike is currently being rented
+     * @return
+     */
     public boolean isBeingRented() {
         boolean res = true;
         String authenticatedUserId = Authentication.getInstance().getUserId();
@@ -47,6 +51,10 @@ public class Bike {
         return res;
     }
 
+    /**
+     * Update bike position in new dock after successful return
+     * @param selectedDock selected dock for returning bike
+     */
     public void moveToNewDock(Dock selectedDock) {
         EntityManager em = DbConnection.getEntityManager();
 
@@ -61,6 +69,10 @@ public class Bike {
         em.getTransaction().commit();
     }
 
+    /**
+     * Get deposit amount to be paid for renting the bike
+     * @return
+     */
     public int getDepositAmount() {
         return (int) (value * 0.4);
     }
