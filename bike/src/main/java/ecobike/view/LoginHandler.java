@@ -24,6 +24,9 @@ import javax.persistence.Query;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * This class handles user login
+ */
 public class LoginHandler extends BaseScreenHandler {
 
     @FXML
@@ -36,6 +39,15 @@ public class LoginHandler extends BaseScreenHandler {
 
     @FXML
     private Label status;
+
+    /**
+     * Validate login request and set up singleton {@link Authentication} object
+     * After successful login, check if user is currently renting bike, if true, update duration
+     * for real-time rent time tracking
+     * @param event
+     * @throws IOException
+     * @throws NoResultException if no user is found with given credentials
+     */
     @FXML
     private void login(ActionEvent event) throws IOException{
         status.setVisible(false);
@@ -75,10 +87,6 @@ public class LoginHandler extends BaseScreenHandler {
         finally {
 
         }
-
-
-
-
 
     }
 

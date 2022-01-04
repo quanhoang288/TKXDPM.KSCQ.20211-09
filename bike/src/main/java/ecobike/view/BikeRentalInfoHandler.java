@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class handles displaying bike rental info and update renting time real-time
+ */
 public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatchObserver {
     @FXML
     private TextField rentingTimeText;
@@ -31,6 +34,13 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         super(stage, screenPath);
     }
 
+    /**
+     * Public constructor for setting up controller, register for stopwatch event and initialize view
+     * @param rentalInfoController
+     * @param stage
+     * @param screenPath
+     * @throws IOException
+     */
     public BikeRentalInfoHandler(RentalInfoController rentalInfoController, Stage stage, String screenPath) throws IOException {
         this(stage, screenPath);
         StopWatch.getInstance().attach(this);
@@ -38,6 +48,9 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         populateData();
     }
 
+    /**
+     * Populate view with rental info data
+     */
     private void populateData() {
         RentalInfoController rentalInfoController = getBController();
         int currentDuration = StopWatch.getInstance().getElapsedTimeInSecond();
@@ -48,6 +61,10 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         this.batteryPercent.setText("" + rentalInfoController.getRentalInfo().getBike().getBatteryPercent());
     }
 
+    /**
+     * Update renting time and rental fee when stopwatch ticks
+     * @param time
+     */
     @Override
     public void update(int time) {
         this.rentingTimeText.setText(Utils.formatTimerDisplay(time));
@@ -57,6 +74,11 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         }
     }
 
+    /**
+     * Handle request to return bike
+     * Redirect to select dock to return bike screen
+     * @throws IOException
+     */
     public void requestToReturnBike() throws IOException {
         assert getBController().getRentalInfo() != null;
         ReturnBikeController returnBikeController = new ReturnBikeController(getBController().getRentalInfo());
@@ -66,11 +88,18 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         returnDockListHandler.show();
     }
 
+    /**
+     * Pause renting
+     */
     public void pauseRentalTime() {
         //TODO: pause rental info
     }
 
 
+    /**
+     * Get base controller for the class
+     * @return
+     */
     @Override
     public RentalInfoController getBController() {
         return (RentalInfoController) super.getBController();

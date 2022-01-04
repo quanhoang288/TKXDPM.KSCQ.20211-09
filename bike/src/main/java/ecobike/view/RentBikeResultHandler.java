@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class handles display rent bike transaction result
+ */
 public class RentBikeResultHandler extends ResultScreenHandler {
 
     @FXML
@@ -48,6 +51,10 @@ public class RentBikeResultHandler extends ResultScreenHandler {
         componentDidMount();
     }
 
+    /**
+     * Display result
+     * @param owner card-holder name of user performing payment transaction
+     */
     @Override
     public void displayResult(String owner) {
         PaymentTransaction paymentTransaction = getBController().getPaymentTransaction();
@@ -55,6 +62,9 @@ public class RentBikeResultHandler extends ResultScreenHandler {
         show();
     }
 
+    /**
+     * Register handler for back button click event
+     */
     private void componentDidMount(){
         back.setOnMouseClicked((MouseEvent e) ->{
             try {
@@ -68,11 +78,20 @@ public class RentBikeResultHandler extends ResultScreenHandler {
         });
     }
 
+    /**
+     * Get base controller
+     * @return
+     */
     @Override
     public RentBikeController getBController() {
         return (RentBikeController) super.getBController();
     }
 
+    /**
+     * Populate result screen with payment transaction and rental info data
+     * @param paymentTransaction
+     * @param owner
+     */
     private void populateData(PaymentTransaction paymentTransaction, String owner){
         System.out.println("Payment transaction: " + paymentTransaction.getCreateAt().toString());
         transactionDate.setText(paymentTransaction.getCreateAt().toString());
