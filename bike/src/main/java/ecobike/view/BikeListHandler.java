@@ -8,6 +8,7 @@ import ecobike.utils.Configs;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -95,14 +96,19 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
     }
 
     private Node createGridItem(Bike bike) {
-        StackPane container = new StackPane();
+        VBox container = new VBox();
         container.setStyle("-fx-background-color:lightgrey");
+        container.setAlignment(Pos.CENTER);
 
-        Label label = new Label("Item Nr. " + bike.getType());
+        Label label = new Label( bike.getType().toString());
+        Label licensePlate = new Label("License plate: "+bike.getLicensePlate());
+        Label batteryLevel = new Label("Battery level: " + bike.getBatteryPercent() + "%");
+
         label.setOnMouseClicked((MouseEvent e) -> {
             initBikeInfoScreen(bike.getId());
         });
-        container.getChildren().add(label);
+        container.getChildren().addAll(label, licensePlate, batteryLevel);
+
         return container;
     }
 
