@@ -89,7 +89,7 @@ public class ReturnBikeController extends AbstractPaymentController {
         System.out.println("Transaction response: " + transactionResponse);
         Date createdAt = null;
         try {
-            createdAt = Utils.parseDateString((String) transactionResponse.get("createdAt"));
+            createdAt = Utils.parseDateString(Utils.getToday());
         } catch (ParseException e) {
             System.out.println("Error parsing date");
             return;
