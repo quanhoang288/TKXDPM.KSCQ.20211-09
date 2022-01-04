@@ -14,6 +14,7 @@ public class BikeRentalInfoRepo {
     private static EntityManager entityManager = DbConnection.getEntityManager();
 
     public static BikeRentalInfo create(User user, Bike bike, Date startAt) {
+        entityManager.getTransaction().begin();
         BikeRentalInfo rentalInfo = BikeRentalInfo
                 .builder()
                 .user(user)
