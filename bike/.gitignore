@@ -1,5 +1,0 @@
-build
-out
-.idea
-.gradle
-src/main/resources/META-INF/persistence.xml
