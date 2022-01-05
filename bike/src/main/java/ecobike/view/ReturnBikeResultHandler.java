@@ -1,8 +1,6 @@
 package ecobike.view;
 
 import ecobike.controller.DockListController;
-import ecobike.controller.RentBikeController;
-import ecobike.controller.RentBikeResultController;
 import ecobike.controller.ReturnBikeController;
 import ecobike.entity.BikeRentalInfo;
 import ecobike.entity.PaymentTransaction;
@@ -16,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class handles displaying return bike transaction result
+ */
 public class ReturnBikeResultHandler extends ResultScreenHandler {
 
     @FXML
@@ -53,6 +54,10 @@ public class ReturnBikeResultHandler extends ResultScreenHandler {
         componentDidMount();
     }
 
+    /**
+     * Display result
+     * @param owner card-holder name of user performing payment transaction
+     */
     @Override
     public void displayResult(String owner) {
         PaymentTransaction paymentTransaction = getBController().getPaymentTransaction();
@@ -60,6 +65,9 @@ public class ReturnBikeResultHandler extends ResultScreenHandler {
         show();
     }
 
+    /**
+     * Register handler for back button click event
+     */
     private void componentDidMount(){
         back.setOnMouseClicked((MouseEvent e) ->{
             try {
@@ -73,11 +81,20 @@ public class ReturnBikeResultHandler extends ResultScreenHandler {
         });
     }
 
+    /**
+     * Get base controller
+     * @return
+     */
     @Override
     public ReturnBikeController getBController() {
         return (ReturnBikeController) super.getBController();
     }
 
+    /**
+     * Populate result screen with payment transaction and rental information
+     * @param paymentTransaction
+     * @param owner
+     */
     private void populateData(PaymentTransaction paymentTransaction, String owner){
         BikeRentalInfo rentalInfo = paymentTransaction.getBikeRentalInfo();
 

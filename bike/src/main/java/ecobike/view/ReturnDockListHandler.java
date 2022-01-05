@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class handles displaying list of docks for returning bike
+ */
 public class ReturnDockListHandler extends BaseScreenHandler {
     @FXML
     private ListView dockListView;
@@ -29,12 +32,18 @@ public class ReturnDockListHandler extends BaseScreenHandler {
         initializeDockListView();
     }
 
+    /**
+     * Handle request to return bike after selecting a dock
+     * @throws IOException
+     */
     public void requestToReturnBike() throws IOException {
+        // Check if user has selected any dock to return bike
         if (this.dockListView.getSelectionModel().isEmpty()) {
             PopupScreen.error("You have to select a dock to return bike");
             return;
         }
 
+        // Check if selected dock is full
         try {
             int selectedIndex = this.dockListView.getSelectionModel().getSelectedIndex();
             getBController().checkDockFull(selectedIndex);
@@ -43,19 +52,28 @@ public class ReturnDockListHandler extends BaseScreenHandler {
             return;
         }
 
+        // Set interbank for return bike controller
         getBController().setInterbank(new InterbankSubsystem());
 
+        // Redirect to payment form
         PaymentFormHandler paymentFormHandler = new PaymentFormHandler(getBController(), this.stage, Configs.PAYMENT_FORM_PATH);
         paymentFormHandler.setResultScreenHandler(new ReturnBikeResultHandler(getBController(), this.stage, Configs.PAYMENT_RETURN_SUCCESS_PATH));
         paymentFormHandler.show();
     }
 
 
+    /**
+     * Populate view with dock list data
+     */
     private void initializeDockListView() {
         List<String> dockNames = getBController().getDockNames();
         this.dockListView.getItems().addAll(dockNames);
     }
 
+    /**
+     * Get base controller
+     * @return
+     */
     public ReturnBikeController getBController() {
         return (ReturnBikeController) super.getBController();
     }

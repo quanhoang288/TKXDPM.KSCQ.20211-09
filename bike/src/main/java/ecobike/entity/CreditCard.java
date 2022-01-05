@@ -18,22 +18,6 @@ public class CreditCard {
         this.dateExpired = getExpirationDate(paymentInfo.get("expirationDate"));
     }
 
-    public String getCardCode() {
-        return cardCode;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public String getCvvCode() {
-        return cvvCode;
-    }
-
-    public String getDateExpired() {
-        return dateExpired;
-    }
-
     private String getExpirationDate(String date) throws InvalidCardException {
         String[] strs = date.split("/");
         if (strs.length != 2) {

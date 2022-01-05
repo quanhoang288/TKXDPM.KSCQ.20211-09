@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class handles displaying list of bikes and user input for searching bike information
+ */
 public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
 
@@ -40,7 +43,9 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     }
 
-
+    /**
+     * Register event handler on search button clicked event
+     */
     private void initialize() {
         searchBtn.setOnMouseClicked((MouseEvent e) -> {
             String searchTxt = searchText.getText();
@@ -53,8 +58,12 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
         });
     }
 
+    /**
+     * Initialize boundary and controller classes for bike detail info and display the view
+     * @param bikeId
+     */
     private void initBikeInfoScreen(String bikeId) {
-        BikeInfoController bikeInfoController = null;
+        BikeInfoController bikeInfoController;
         try {
             bikeInfoController = new BikeInfoController(bikeId, new BikeRepo());
         } catch (NoResultException e) {
@@ -62,7 +71,7 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
             return;
         }
 
-        BikeInfoHandler bikeInfoHandler = null;
+        BikeInfoHandler bikeInfoHandler;
         try {
             bikeInfoHandler = new BikeInfoHandler(bikeInfoController, this.stage, Configs.BIKE_DETAIL_PATH);
         } catch (IOException e) {
@@ -74,6 +83,13 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
     }
 
 
+    /**
+     * Initialize grid view for displaying list of bikes
+     * @param rows
+     * @param cols
+     * @param gap
+     * @return
+     */
     private GridPane createGridTemplate(int rows, int cols, int gap) {
         GridPane grid = new GridPane();
         grid.setHgap(gap);
@@ -95,6 +111,11 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     }
 
+    /**
+     * Create single grid item holding bike's information
+     * @param bike
+     * @return
+     */
     private Node createGridItem(Bike bike) {
         VBox container = new VBox();
         container.setStyle("-fx-background-color:lightgrey");
@@ -112,6 +133,11 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
         return container;
     }
 
+    /**
+     * Populate grid with bike-data items
+     * @param items
+     * @param gridPane
+     */
     private void populateGridItems(List<Node> items, GridPane gridPane) {
         int rows = gridPane.getRowCount();
         int cols = gridPane.getColumnCount();
@@ -133,6 +159,9 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
         }
     }
 
+    /**
+     * Fetch lists of bike from DB and populate grid view
+     */
     public void initializeBikes() {
         this.pagination.setPageFactory((Integer index) -> {
             int rows = 3;

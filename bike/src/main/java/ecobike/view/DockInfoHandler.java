@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class handles displaying dock detail information
+ */
 public class DockInfoHandler extends BaseScreenHandler<DockInfoController> {
 
     @FXML
@@ -34,6 +37,9 @@ public class DockInfoHandler extends BaseScreenHandler<DockInfoController> {
         initialize();
     }
 
+    /**
+     * Populate view with dock detail info
+     */
     private void initialize() {
         Dock dock = getBController().getDock();
         nameText.setText(dock.getName());
@@ -42,6 +48,10 @@ public class DockInfoHandler extends BaseScreenHandler<DockInfoController> {
         numBikesText.setText("" + dock.getBikes().size());
     }
 
+    /**
+     * Handle request to view bike list of current dock in display
+     * @throws IOException
+     */
     public void viewBikeList() throws IOException {
         BikeListHandler bikeListHandler = new BikeListHandler(this.stage, Configs.RENT_BIKE_PATH);
         bikeListHandler.setPreviousScreen(this);

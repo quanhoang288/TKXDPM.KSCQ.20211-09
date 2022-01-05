@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * This class handle user interactions with bike detail screen and display bike detail information
+ */
 public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
 
     @FXML
@@ -37,6 +41,13 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
 
     }
 
+    /**
+     * Public constructor for initializing view data, event handlers and setting base controller
+     * @param bikeInfoController
+     * @param stage
+     * @param screenPath
+     * @throws IOException
+     */
     public BikeInfoHandler(BikeInfoController bikeInfoController, Stage stage, String screenPath) throws IOException {
         this(stage, screenPath);
         super.setBController(bikeInfoController);
@@ -45,6 +56,9 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
     }
 
 
+    /**
+     * Populate view with bike information
+     */
     public void initializeInfo() {
         BikeInfoController ctrl = getBController();
         Bike bike = ctrl.getBike();
@@ -53,13 +67,18 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
         batteryPercent.setText(bike.getBatteryPercent() + "%");
     }
 
+    /**
+     * Register user event handlers
+     */
     public void registerHandlers() {
         backButton.setOnMouseClicked((MouseEvent e) -> {
             getPreviousScreen().show();
         });
 
         rentBikeBtn.setOnMouseClicked((MouseEvent e) -> {
-            RentBikeController rentBikeController = null;
+            RentBikeController rentBikeController;
+            // Check if selected bike has already been rented or user is currently renting another bike
+            // If false initialize rent bike controller
             try {
                 rentBikeController = new RentBikeController(getBController().getBike());
             } catch (BikeAlreadyRentedException | UserAlreadyRentingException ex) {
@@ -67,8 +86,10 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
                 return;
             }
 
+            // set interbank for rent bike controller
             rentBikeController.setInterbank(new InterbankSubsystem());
 
+            // redirect to payment form
             try {
                 PaymentFormHandler paymentFormHandler = new PaymentFormHandler(rentBikeController, this.stage, Configs.PAYMENT_FORM_PATH);
                 paymentFormHandler.setResultScreenHandler(new RentBikeResultHandler(rentBikeController, this.stage, Configs.PAYMENT_RENT_SUCCESS_PATH));
