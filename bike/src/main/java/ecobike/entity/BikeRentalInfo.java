@@ -58,14 +58,14 @@ public class BikeRentalInfo {
     public int calculateRentalFee(int time) {
         System.out.println("Calculating rental fee");
         double dTime = time;
-        if (dTime <= 60) {
+        if (dTime <= 60 * 10) {
             return 0;
         }
 
         double amount = 10000;
         dTime -= 30 * 60;
         if (dTime > 0) {
-            amount += 3000 * Math.ceil(dTime / (2 * 60));
+            amount += 3000 * Math.ceil(dTime / (15 * 60));
         }
 
         if (bike.getType() == BIKETYPE.STANDARD_E_BIKE || bike.getType() == BIKETYPE.TWIN_BIKE) amount *= 1.5;

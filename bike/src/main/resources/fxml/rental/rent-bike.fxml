@@ -46,7 +46,7 @@
             </Pane>
             <Pane prefHeight="786.0" prefWidth="1142.0" GridPane.columnIndex="1">
                <children>
-                  <TextField fx:id="searchText" layoutX="87.0" layoutY="21.0" prefHeight="39.0" prefWidth="526.0" promptText="Enter name or rental code">
+                  <TextField fx:id="searchText" layoutX="87.0" layoutY="21.0" prefHeight="39.0" prefWidth="526.0" promptText="Enter barcode">
                      <font>
                         <Font size="20.0" />
                      </font>
