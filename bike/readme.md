@@ -29,5 +29,5 @@ Go to `src\main\resource\META-INF\persistence.xml` : Change `username` and `pass
 ## Author
 - Hoàng Huy Quân: 20183609
 - Nguyễn Đức Thắng: 20183629
-- Vũ Tấn Khang: 
-- Rattanak Neariroth: 
+- Vũ Tấn Khang: 20183561
+- Rattanak Neariroth: 20180278
