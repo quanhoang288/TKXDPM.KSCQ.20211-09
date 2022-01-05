@@ -5,6 +5,7 @@ import ecobike.controller.BikeListController;
 import ecobike.entity.Bike;
 import ecobike.repository.BikeRepo;
 import ecobike.utils.Configs;
+import ecobike.utils.Utils;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -44,14 +45,10 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
     }
 
 
-
-    private void registerHandler() {
-
     /**
      * Register event handler on search button clicked event
      */
-
-
+    private void registerHandler() {
         searchBtn.setOnMouseClicked((MouseEvent e) -> {
             String searchTxt = searchText.getText();
             BikeListController ctrl = getBController();
@@ -129,11 +126,12 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
         Label label = new Label( bike.getType().toString());
         Label licensePlate = new Label("License plate: "+bike.getLicensePlate());
         Label batteryLevel = new Label("Battery level: " + bike.getBatteryPercent() + "%");
+        Label value = new Label("Value: " + Utils.getCurrencyFormat(bike.getValue()));
 
         label.setOnMouseClicked((MouseEvent e) -> {
             initBikeInfoScreen(bike.getId());
         });
-        container.getChildren().addAll(label, licensePlate, batteryLevel);
+        container.getChildren().addAll(label, licensePlate, batteryLevel, value);
 
         return container;
     }

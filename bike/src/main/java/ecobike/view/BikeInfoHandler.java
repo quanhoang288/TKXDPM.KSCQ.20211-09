@@ -8,6 +8,7 @@ import ecobike.entity.Bike;
 import ecobike.entity.PaymentTransaction;
 import ecobike.subsystem.InterbankSubsystem;
 import ecobike.utils.Configs;
+import ecobike.utils.Utils;
 import ecobike.view.base.BaseScreenHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,6 +36,8 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
     private Label licensePlate;
     @FXML
     private Label batteryPercent;
+    @FXML
+    private Label value;
 
     private BikeInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
@@ -65,6 +68,7 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
         type.setText(bike.getType().toString());
         licensePlate.setText(bike.getLicensePlate());
         batteryPercent.setText(bike.getBatteryPercent() + "%");
+        value.setText(Utils.getCurrencyFormat(bike.getValue()));
     }
 
     /**
