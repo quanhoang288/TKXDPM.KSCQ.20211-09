@@ -36,12 +36,12 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     public BikeListHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        initialize();
+        registerHandler();
 
     }
 
 
-    private void initialize() {
+    private void registerHandler() {
         searchBtn.setOnMouseClicked((MouseEvent e) -> {
             String searchTxt = searchText.getText();
             BikeListController ctrl = getBController();
