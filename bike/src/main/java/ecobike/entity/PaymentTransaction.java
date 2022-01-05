@@ -42,9 +42,4 @@ public class PaymentTransaction {
 
     }
 
-//    public BikeRentalInfo getBikeRentalInfo() { return bikeRentalInfo; }
-//
-//    public String getErrorCode() {
-//        return errorCode;
-//    }
 }

@@ -50,11 +50,11 @@ public class BikeRentalInfo {
     private List<PaymentTransaction> transactions;
 
 
-    public void addTransaction(PaymentTransaction paymentTransaction) {
-        if (transactions == null) transactions = new ArrayList<>();
-        transactions.add(paymentTransaction);
-    }
-
+    /**
+     * Calculate rental fee given current renting time
+     * @param time current renting time in seconds
+     * @return
+     */
     public int calculateRentalFee(int time) {
         System.out.println("Calculating rental fee");
         double dTime = time;
@@ -73,6 +73,11 @@ public class BikeRentalInfo {
         return (int) amount;
     }
 
+    /**
+     * Update rental status and duration
+     * @param status
+     * @param durationInSeconds
+     */
     public void updateStatus(RENTALSTATUS status, int durationInSeconds) {
         EntityManager em = DbConnection.getEntityManager();
         em.getTransaction().begin();

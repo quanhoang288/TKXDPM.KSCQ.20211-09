@@ -9,6 +9,9 @@ import ecobike.utils.Utils;
 
 import java.util.Map;
 
+/**
+ * Controller class for creating and sending request to API for payment-related transactions
+ */
 public class InterbankSubsystemController {
 
     private static final String PUBLIC_KEY = "A5NouKUnbP8=";
@@ -17,9 +20,22 @@ public class InterbankSubsystemController {
     private static final String REFUND_COMMAND = "refund";
     private static final String VERSION = "1.0.1";
 
+    /**
+     * Instance of boundary class for communicating directly with API
+     */
     private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
-    public MyMap performRefund(CreditCard card, int amount, String contents) {
+    /**
+     * Create and send request for refund transaction
+     * Process and reformat API response afterward
+     * @param card information of user credit card
+     * @param amount amount of money to perform transaction
+     * @param contents description of transaction
+     * @return {@link MyMap} object containing transaction response
+     * @throws PaymentException if API responded with an error code
+     * @throws UnrecognizedException if error code is not recognizable
+     */
+    public MyMap performRefund(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException {
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -49,7 +65,17 @@ public class InterbankSubsystemController {
         return processResponse(responseText);
     }
 
-    public MyMap performPayment(CreditCard card, int amount, String contents) throws PaymentException{
+    /**
+     * Create and send request for payment transaction.
+     * Process and reformat API response afterward
+     * @param card information of user credit card
+     * @param amount amount of money to perform transaction
+     * @param contents description of transaction
+     * @return {@link MyMap} object containing transaction response
+     * @throws PaymentException if API responded with an error code
+     * @throws UnrecognizedException if error code is not recognizable
+     */
+    public MyMap performPayment(CreditCard card, int amount, String contents) throws PaymentException, UnrecognizedException{
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -79,8 +105,20 @@ public class InterbankSubsystemController {
         return processResponse(responseText);
     }
 
+    /**
+     * Check for error code and convert response text to map-like format
+     * @param responseText response received from API
+     * @return {@link MyMap} object containing transaction response
+     * @throws InvalidCardException if card information is not valid
+     * @throws NotEnoughBalanceException if there is not enough money in card
+     * @throws InternalServerErrorException if there is an error occurred from API side
+     * @throws SuspiciousTransactionException if transaction does not contain hashed code
+     * @throws InvalidVersionException if API version provided in request body is not valid
+     * @throws InvalidTransactionAmountException if amount provided in request body is not valid
+     * @throws UnrecognizedException if not able to parse API response
+     */
     private MyMap processResponse(String responseText) {
-        MyMap response = null;
+        MyMap response;
         try {
             response = MyMap.toMyMap(responseText, 0);
         } catch (IllegalArgumentException e) {

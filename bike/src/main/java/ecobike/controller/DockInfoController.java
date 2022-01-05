@@ -2,8 +2,10 @@ package ecobike.controller;
 
 import ecobike.controller.base.BaseController;
 import ecobike.entity.Dock;
-import ecobike.repository.DockRepo;
 
+/**
+ * This class store instance of {@link Dock} for displaying dock information in view
+ */
 public class DockInfoController extends BaseController {
     private Dock dock;
 
