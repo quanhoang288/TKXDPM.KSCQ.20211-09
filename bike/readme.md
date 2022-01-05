@@ -30,4 +30,4 @@ Go to `src\main\resource\META-INF\persistence.xml` : Change `username` and `pass
 - Hoàng Huy Quân: 20183609
 - Nguyễn Đức Thắng: 20183629
 - Vũ Tấn Khang: 
-- Rattanak Neariroth: 
+- Rattanak Neariroth: 20180278
