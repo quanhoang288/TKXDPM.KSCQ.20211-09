@@ -52,20 +52,28 @@ public class Bike {
     }
 
     /**
-     * Update bike position in new dock after successful return
-     * @param selectedDock selected dock for returning bike
+     * Update bike position to a new dock
+     * @param newDock selected dock
      */
-    public void moveToNewDock(Dock selectedDock) {
+    public void updateDock(Dock newDock) {
         EntityManager em = DbConnection.getEntityManager();
 
-        // remove bike from old dock
-        Dock oldDock = dock;
-        List<Bike> oldDockBikeList = oldDock.getBikes();
-        oldDockBikeList.remove(this);
-
         em.getTransaction().begin();
-        setDock(selectedDock);
-        oldDock.setBikes(oldDockBikeList);
+
+        // remove bike from old dock bike list
+        Dock oldDock = dock;
+        List<Bike> bikeList = oldDock.getBikes();
+        bikeList.remove(this);
+        oldDock.setBikes(bikeList);
+
+        // add dock to new dock bike list if not null
+        if (newDock != null) {
+            List<Bike> newDockBikeList = newDock.getBikes();
+            newDockBikeList.add(this);
+            newDock.setBikes(newDockBikeList);
+            setDock(newDock);
+        }
+
         em.getTransaction().commit();
     }
 

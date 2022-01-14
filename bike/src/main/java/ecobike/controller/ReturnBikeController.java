@@ -127,7 +127,8 @@ public class ReturnBikeController extends AbstractPaymentController {
 
         // update rental info status and move bike to the returned dock
         bikeRentalInfo.updateStatus(RENTALSTATUS.FINISHED, StopWatch.getInstance().getElapsedTimeInSecond());
-        bikeRentalInfo.getBike().moveToNewDock(selectedDock);
+        bikeRentalInfo.getBike().updateDock(selectedDock);
+
 
         PAYCONTENT method = ((String)transactionResponse.get("command")).equals("pay") ? PAYCONTENT.RETURN_PAY : PAYCONTENT.RETURN_REFUND;
 

@@ -2,6 +2,7 @@ package ecobike.repository;
 
 import ecobike.db.DbConnection;
 import ecobike.entity.Bike;
+import ecobike.entity.Dock;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
