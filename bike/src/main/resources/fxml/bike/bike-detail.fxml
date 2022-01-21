@@ -108,14 +108,14 @@
                         <RowConstraints maxHeight="104.0000478671911" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="72.07701319922235" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
                      </rowConstraints>
-                     <children>
-                        <Label prefHeight="41.0" prefWidth="152.0" style="-fx-font-size: 24;" text="First 30 min" />
-                        <Label style="-fx-font-size: 24;" text="10.000 VND" GridPane.columnIndex="1" />
-                        <Label style="-fx-font-size: 24;" text="After first 30 min" GridPane.rowIndex="1" />
-                        <Label prefHeight="67.0" prefWidth="238.0" style="-fx-font-size: 24;" text="3.000 VND / 15 min" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     </children>
+<!--                     <children>-->
+<!--                        <Label prefHeight="41.0" prefWidth="152.0" style="-fx-font-size: 24;" text="First 30 min" />-->
+<!--                        <Label fx:id="firstThirtyMinFee" style="-fx-font-size: 24;" text="10.000 VND" GridPane.columnIndex="1" />-->
+<!--                        <Label style="-fx-font-size: 24;" text="After first 30 min" GridPane.rowIndex="1" />-->
+<!--                        <Label fx:id="afterThirtyMinFee" prefHeight="67.0" prefWidth="238.0" style="-fx-font-size: 24;" text="3.000 VND / 15 min" GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
+<!--                     </children>-->
                   </GridPane>
-                  <Label layoutX="769.0" layoutY="61.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="COST" />
+<!--                  <Label layoutX="769.0" layoutY="61.0" style="-fx-font-size: 24; -fx-font-weight: bold;" text="COST" />-->
                </children>
             </AnchorPane>
          </children>

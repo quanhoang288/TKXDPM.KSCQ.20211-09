@@ -2,6 +2,7 @@ package ecobike.view;
 
 import ecobike.controller.BikeInfoController;
 import ecobike.controller.BikeListController;
+import ecobike.entity.BIKETYPE;
 import ecobike.entity.Bike;
 import ecobike.repository.BikeRepo;
 import ecobike.utils.Configs;
@@ -125,13 +126,17 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
         Label label = new Label( bike.getType().toString());
         Label licensePlate = new Label("License plate: "+bike.getLicensePlate());
-        Label batteryLevel = new Label("Battery level: " + bike.getBatteryPercent() + "%");
         Label value = new Label("Value: " + Utils.getCurrencyFormat(bike.getValue()));
 
         label.setOnMouseClicked((MouseEvent e) -> {
             initBikeInfoScreen(bike.getId());
         });
-        container.getChildren().addAll(label, licensePlate, batteryLevel, value);
+        container.getChildren().addAll(label, licensePlate, value);
+
+        if (bike.isEBike()) {
+            Label batteryLevel = new Label("Battery level: " + bike.getBatteryPercent() + "%");
+            container.getChildren().add(batteryLevel);
+        }
 
         return container;
     }

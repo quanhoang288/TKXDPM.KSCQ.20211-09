@@ -4,6 +4,7 @@ import ecobike.common.exception.BikeAlreadyRentedException;
 import ecobike.common.exception.UserAlreadyRentingException;
 import ecobike.controller.BikeInfoController;
 import ecobike.controller.RentBikeController;
+import ecobike.entity.BIKETYPE;
 import ecobike.entity.Bike;
 import ecobike.entity.PaymentTransaction;
 import ecobike.subsystem.InterbankSubsystem;
@@ -67,7 +68,7 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
         Bike bike = ctrl.getBike();
         type.setText(bike.getType().toString());
         licensePlate.setText(bike.getLicensePlate());
-        batteryPercent.setText(bike.getBatteryPercent() + "%");
+        batteryPercent.setText(bike.isEBike() ? bike.getBatteryPercent() + "%" : "None");
         value.setText(Utils.getCurrencyFormat(bike.getValue()));
     }
 

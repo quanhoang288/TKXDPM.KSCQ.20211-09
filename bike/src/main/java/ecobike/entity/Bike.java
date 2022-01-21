@@ -84,4 +84,12 @@ public class Bike {
     public int getDepositAmount() {
         return (int) (value * 0.4);
     }
+
+    /**
+     * Check if bike type is electric
+     * @return
+     */
+    public boolean isEBike() {
+        return type == BIKETYPE.STANDARD_E_BIKE;
+    }
 }
