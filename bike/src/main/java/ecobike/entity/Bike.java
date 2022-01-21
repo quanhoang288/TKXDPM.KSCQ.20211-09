@@ -3,7 +3,10 @@ package ecobike.entity;
 import ecobike.db.DbConnection;
 import ecobike.repository.BikeRentalInfoRepo;
 import ecobike.security.Authentication;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,7 +24,7 @@ public class Bike {
             name = "UUID",
             strategy = "uuid2"
     )
-    private String  id;
+    private String id;
     @Enumerated(EnumType.STRING)
     private BIKETYPE type;
     @Column(name = "licensePlate")
@@ -38,6 +41,7 @@ public class Bike {
 
     /**
      * Check if bike is currently being rented
+     *
      * @return
      */
     public boolean isBeingRented() {
@@ -53,6 +57,7 @@ public class Bike {
 
     /**
      * Update bike position in new dock after successful return
+     *
      * @param selectedDock selected dock for returning bike
      */
     public void moveToNewDock(Dock selectedDock) {
@@ -71,9 +76,19 @@ public class Bike {
 
     /**
      * Get deposit amount to be paid for renting the bike
+     *
      * @return
      */
     public int getDepositAmount() {
         return (int) (value * 0.4);
+    }
+
+    /**
+     * Check if bike type is electric
+     *
+     * @return
+     */
+    public boolean isEBike() {
+        return type == BIKETYPE.STANDARD_E_BIKE;
     }
 }

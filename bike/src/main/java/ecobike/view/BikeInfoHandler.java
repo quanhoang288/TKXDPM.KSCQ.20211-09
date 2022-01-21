@@ -31,6 +31,10 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
     private Button backButton;
 
     @FXML
+    private Label price;
+    @FXML
+    private Label pricePerMin;
+    @FXML
     private Label type;
     @FXML
     private Label licensePlate;
@@ -67,8 +71,9 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
         Bike bike = ctrl.getBike();
         type.setText(bike.getType().toString());
         licensePlate.setText(bike.getLicensePlate());
-        batteryPercent.setText(bike.getBatteryPercent() + "%");
+        batteryPercent.setText(bike.isEBike() ? bike.getBatteryPercent() + "%" : "None");
         value.setText(Utils.getCurrencyFormat(bike.getValue()));
+
     }
 
     /**
