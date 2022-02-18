@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * This class handles displaying list of bikes and user input for searching bike information
  */
-public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
+public class BikeListHandler extends BaseScreenHandler<BikeListController> {
 
 
     @FXML
@@ -62,6 +62,7 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     /**
      * Initialize boundary and controller classes for bike detail info and display the view
+     *
      * @param bikeId
      */
     private void initBikeInfoScreen(String bikeId) {
@@ -87,6 +88,7 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     /**
      * Initialize grid view for displaying list of bikes
+     *
      * @param rows
      * @param cols
      * @param gap
@@ -115,6 +117,7 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
     /**
      * Create single grid item holding bike's information
+     *
      * @param bike
      * @return
      */
@@ -123,25 +126,21 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
         container.setStyle("-fx-background-color:lightgrey");
         container.setAlignment(Pos.CENTER);
 
-        Label label = new Label( bike.getType().toString());
-        Label licensePlate = new Label("License plate: "+bike.getLicensePlate());
-
+        Label label = new Label(bike.getName());
         Label value = new Label("Value: " + Utils.getCurrencyFormat(bike.getValue()));
 
         label.setOnMouseClicked((MouseEvent e) -> {
             initBikeInfoScreen(bike.getId());
         });
-        container.getChildren().addAll(label, licensePlate, value);
-        if (bike.isEBike()) {
-            Label batteryLevel = new Label("Battery level: " + bike.getBatteryPercent() + "%");
-            container.getChildren().add(batteryLevel);
-        }
+        container.getChildren().addAll(label, value);
+
 
         return container;
     }
 
     /**
      * Populate grid with bike-data items
+     *
      * @param items
      * @param gridPane
      */
@@ -184,7 +183,6 @@ public class BikeListHandler extends BaseScreenHandler<BikeListController>  {
 
         });
     }
-
 
 
 }

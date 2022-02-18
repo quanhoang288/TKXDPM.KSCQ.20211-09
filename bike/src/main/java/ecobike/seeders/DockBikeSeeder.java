@@ -1,9 +1,6 @@
 package ecobike.seeders;
 
-import ecobike.entity.BIKETYPE;
-import ecobike.entity.Bike;
-import ecobike.entity.Dock;
-import ecobike.utils.Configs;
+import ecobike.entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,14 +30,25 @@ public class DockBikeSeeder {
             Dock dock = Dock.builder().address(address).area(area).capacity(capacity).name(dockName).build();
             entityManager.persist(dock);
 
-            for (int j = 0; j < 10; j++) {
-                String licensePlate = UUID.randomUUID().toString();
-                int batterPercent = r.nextInt(101);
-                int value = r.nextInt(1000000);
 
-                Bike bike = Bike.builder().dock(dock).type(BIKETYPE.values()[new Random().nextInt(BIKETYPE.values().length)]).licensePlate(licensePlate).batteryPercent(batterPercent).value(value).build();
-                entityManager.persist(bike);
-            }
+            String licensePlate = UUID.randomUUID().toString();
+            int batterPercent = r.nextInt(101);
+            int value = r.nextInt(1000000);
+
+            Bike bike = StandardEBike.builder().dock(dock).licensePlate(licensePlate).batteryPercent(batterPercent).value(value).build();
+            entityManager.persist(bike);
+
+
+            value = r.nextInt(1000000);
+
+            bike = StandardBike.builder().dock(dock).value(value).build();
+            entityManager.persist(bike);
+
+            value = r.nextInt(1000000);
+
+            bike = TwinBike.builder().dock(dock).value(value).build();
+            entityManager.persist(bike);
+
         }
 
         entityManager.getTransaction().commit();

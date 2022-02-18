@@ -11,13 +11,15 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+
 @Data
-public class Bike {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Bike {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -25,12 +27,8 @@ public class Bike {
             strategy = "uuid2"
     )
     private String id;
-    @Enumerated(EnumType.STRING)
-    private BIKETYPE type;
-    @Column(name = "licensePlate")
-    private String licensePlate;
-    @Column(name = "batteryPercent")
-    private int batteryPercent;
+
+
     @Column(name = "value")
     private int value;
     @ManyToOne
@@ -79,16 +77,18 @@ public class Bike {
      *
      * @return
      */
+
     public int getDepositAmount() {
-        return (int) (value * 0.4);
+        return (int) (getValue()*0.4);
     }
 
-    /**
-     * Check if bike type is electric
-     *
-     * @return
-     */
-    public boolean isEBike() {
-        return type == BIKETYPE.STANDARD_E_BIKE;
-    }
+    public abstract int getInitialRentFee();
+
+    public abstract int getRentFeePerTimePeriod();
+
+    public abstract String getName();
+
+    public abstract Map<String, String> getExtraInfo();
+
+
 }

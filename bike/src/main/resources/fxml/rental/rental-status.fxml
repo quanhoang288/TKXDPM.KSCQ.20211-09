@@ -46,7 +46,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Button layoutX="479.0" layoutY="631.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="148.0" text="Return bike" onMouseClicked="#requestToReturnBike">
+                  <Button layoutX="479.0" layoutY="631.0" mnemonicParsing="false" onMouseClicked="#requestToReturnBike" prefHeight="39.0" prefWidth="148.0" text="Return bike">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -66,7 +66,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label prefHeight="122.0" prefWidth="476.0" style="-fx-alignment: center;" text="Bike type">
@@ -84,11 +83,6 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="122.0" prefWidth="476.0" style="-fx-alignment: center;" text="Bike status" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
                         <TextField fx:id="bikeType" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="Standard bike" GridPane.columnIndex="1">
                            <font>
                               <Font size="24.0" />
@@ -100,11 +94,6 @@
                            </font>
                         </TextField>
                         <TextField fx:id="amountToPayText" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="batteryPercent" editable="false" prefHeight="73.0" prefWidth="413.0" style="-fx-alignment: center;" text="80%" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="24.0" />
                            </font>

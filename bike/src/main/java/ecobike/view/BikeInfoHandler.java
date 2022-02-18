@@ -5,7 +5,6 @@ import ecobike.common.exception.UserAlreadyRentingException;
 import ecobike.controller.BikeInfoController;
 import ecobike.controller.RentBikeController;
 import ecobike.entity.Bike;
-import ecobike.entity.PaymentTransaction;
 import ecobike.subsystem.InterbankSubsystem;
 import ecobike.utils.Configs;
 import ecobike.utils.Utils;
@@ -14,10 +13,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -31,17 +31,18 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
     private Button backButton;
 
     @FXML
+    private Label cost;
+    @FXML
+    private Label name;
+    @FXML
     private Label price;
     @FXML
     private Label pricePerMin;
     @FXML
     private Label type;
+
     @FXML
-    private Label licensePlate;
-    @FXML
-    private Label batteryPercent;
-    @FXML
-    private Label value;
+    private Pane extra;
 
     private BikeInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
@@ -50,6 +51,7 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
 
     /**
      * Public constructor for initializing view data, event handlers and setting base controller
+     *
      * @param bikeInfoController
      * @param stage
      * @param screenPath
@@ -69,10 +71,20 @@ public class BikeInfoHandler extends BaseScreenHandler<BikeInfoController> {
     public void initializeInfo() {
         BikeInfoController ctrl = getBController();
         Bike bike = ctrl.getBike();
-        type.setText(bike.getType().toString());
-        licensePlate.setText(bike.getLicensePlate());
-        batteryPercent.setText(bike.isEBike() ? bike.getBatteryPercent() + "%" : "None");
-        value.setText(Utils.getCurrencyFormat(bike.getValue()));
+
+        cost.setText(Utils.getCurrencyFormat(bike.getValue()));
+        name.setText(bike.getName());
+        Map<String ,String > extraInfo = bike.getExtraInfo();
+
+        if(extraInfo != null){
+            for(String key : extraInfo.keySet()){
+                Label label = new Label(key + " : "+ extraInfo.get(key));
+                extra.getChildren().add(label);
+            }
+        }
+
+        pricePerMin.setText(String.valueOf(bike.getRentFeePerTimePeriod()));
+        price.setText(String.valueOf(bike.getInitialRentFee()));
 
     }
 

@@ -1,13 +1,10 @@
 package ecobike.entity;
 
 import ecobike.db.DbConnection;
-import ecobike.utils.Configs;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -62,13 +59,13 @@ public class BikeRentalInfo {
             return 0;
         }
 
-        double amount = 10000;
+        double amount = bike.getInitialRentFee();
         dTime -= 30 * 60;
         if (dTime > 0) {
             amount += 3000 * Math.ceil(dTime / (15 * 60));
         }
 
-        if (bike.getType() == BIKETYPE.STANDARD_E_BIKE || bike.getType() == BIKETYPE.TWIN_BIKE) amount *= 1.5;
+
 
         return (int) amount;
     }

@@ -2,7 +2,6 @@ package ecobike.view;
 
 import ecobike.controller.RentalInfoController;
 import ecobike.controller.ReturnBikeController;
-import ecobike.entity.BikeRentalInfo;
 import ecobike.utils.Configs;
 import ecobike.utils.StopWatch;
 import ecobike.utils.StopWatchObserver;
@@ -27,8 +26,6 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
     @FXML
     private TextField bikeType;
 
-    @FXML
-    private TextField batteryPercent;
 
     private BikeRentalInfoHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
@@ -36,6 +33,7 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
 
     /**
      * Public constructor for setting up controller, register for stopwatch event and initialize view
+     *
      * @param rentalInfoController
      * @param stage
      * @param screenPath
@@ -55,14 +53,15 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
         RentalInfoController rentalInfoController = getBController();
         int currentDuration = StopWatch.getInstance().getElapsedTimeInSecond();
         int amountToPay = rentalInfoController.calculateAmountToPay(currentDuration);
-        this.bikeType.setText(rentalInfoController.getRentalInfo().getBike().getType().toString());
+        this.bikeType.setText(rentalInfoController.getRentalInfo().getBike().getName());
         this.rentingTimeText.setText(Utils.formatTimerDisplay(currentDuration));
         this.amountToPayText.setText("" + Utils.getCurrencyFormat(amountToPay));
-        this.batteryPercent.setText("" + rentalInfoController.getRentalInfo().getBike().getBatteryPercent());
+
     }
 
     /**
      * Update renting time and rental fee when stopwatch ticks
+     *
      * @param time
      */
     @Override
@@ -77,6 +76,7 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
     /**
      * Handle request to return bike
      * Redirect to select dock to return bike screen
+     *
      * @throws IOException
      */
     public void requestToReturnBike() throws IOException {
@@ -98,6 +98,7 @@ public class BikeRentalInfoHandler extends BaseScreenHandler implements StopWatc
 
     /**
      * Get base controller for the class
+     *
      * @return
      */
     @Override

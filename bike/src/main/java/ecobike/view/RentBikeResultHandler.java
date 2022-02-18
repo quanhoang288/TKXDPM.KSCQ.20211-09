@@ -98,7 +98,7 @@ public class RentBikeResultHandler extends ResultScreenHandler {
         transactionId.setText(paymentTransaction.getId());
         cardHolder.setText(owner);
         dock.setText(paymentTransaction.getBikeRentalInfo().getBike().getDock().getName());
-        bikeType.setText(paymentTransaction.getBikeRentalInfo().getBike().getType().toString());
+        bikeType.setText(paymentTransaction.getBikeRentalInfo().getBike().getName());
         deposit.setText(Utils.getCurrencyFormat(paymentTransaction.getAmount()));
     }
 }

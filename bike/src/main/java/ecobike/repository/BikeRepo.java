@@ -26,7 +26,7 @@ public class BikeRepo implements IBikeRepo {
         q.setParameter("dockId", dockId);
         q.setFirstResult(start);
         q.setMaxResults(count);
-        List<Bike> bikes = (List<Bike>) q.getResultList();
+        List<Bike> bikes = q.getResultList();
 
         return bikes;
     }
@@ -38,11 +38,11 @@ public class BikeRepo implements IBikeRepo {
      * @throws NoResultException if no bike is found with given id
      */
     public Bike findById(String id) throws NoResultException {
-        Query q = entityManager.createQuery("select b from  Bike b where b.id = :id");
+        Query q = entityManager.createQuery("select b from  Bike b where b.id = :id", Bike.class);
         q.setParameter("id", id);
-        Bike bike = (Bike) q.getSingleResult();
+        List<Bike> bikes = q.getResultList();
 
-        return bike;
+        return bikes.get(0);
     }
 
 }
