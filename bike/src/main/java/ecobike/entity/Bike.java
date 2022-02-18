@@ -54,21 +54,34 @@ public abstract class Bike {
     }
 
     /**
+<<<<<<< HEAD
      * Update bike position in new dock after successful return
      *
      * @param selectedDock selected dock for returning bike
+=======
+     * Update bike position to a new dock
+     * @param newDock selected dock
+>>>>>>> 57f51c1bbb72a32f44ace9449b6a008c6f89f220
      */
-    public void moveToNewDock(Dock selectedDock) {
+    public void updateDock(Dock newDock) {
         EntityManager em = DbConnection.getEntityManager();
 
-        // remove bike from old dock
-        Dock oldDock = dock;
-        List<Bike> oldDockBikeList = oldDock.getBikes();
-        oldDockBikeList.remove(this);
-
         em.getTransaction().begin();
-        setDock(selectedDock);
-        oldDock.setBikes(oldDockBikeList);
+
+        // remove bike from old dock bike list
+        Dock oldDock = dock;
+        List<Bike> bikeList = oldDock.getBikes();
+        bikeList.remove(this);
+        oldDock.setBikes(bikeList);
+
+        // add dock to new dock bike list if not null
+        if (newDock != null) {
+            List<Bike> newDockBikeList = newDock.getBikes();
+            newDockBikeList.add(this);
+            newDock.setBikes(newDockBikeList);
+            setDock(newDock);
+        }
+
         em.getTransaction().commit();
     }
 
@@ -82,6 +95,7 @@ public abstract class Bike {
         return (int) (getValue()*0.4);
     }
 
+
     public abstract int getInitialRentFee();
 
     public abstract int getRentFeePerTimePeriod();
@@ -89,6 +103,7 @@ public abstract class Bike {
     public abstract String getName();
 
     public abstract Map<String, String> getExtraInfo();
+
 
 
 }

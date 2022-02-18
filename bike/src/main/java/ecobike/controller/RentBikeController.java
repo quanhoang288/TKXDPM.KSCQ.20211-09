@@ -85,6 +85,7 @@ public class RentBikeController extends AbstractPaymentController{
 
         // initialize and save rental info
         BikeRentalInfo rentalInfo = BikeRentalInfoRepo.create(user, bike, createdAt);
+        bike.updateDock(null);
 
         // save payment transaction for corresponding rental info
         PaymentTransaction paymentTransaction = PaymentTransactionRepo.create(

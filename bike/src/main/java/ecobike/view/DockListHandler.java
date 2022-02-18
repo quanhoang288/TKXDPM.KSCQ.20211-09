@@ -34,7 +34,7 @@ public class DockListHandler extends BaseScreenHandler<DockListController> {
         DockListController dockListController = getBController();
         List<Dock> docks = dockListController.findAll();
         this.docks = docks;
-        this.dockListView.getItems().addAll(docks.stream().map((Dock dock) -> dock.getAddress()).collect(Collectors.toList()));
+        this.dockListView.getItems().addAll(docks.stream().map((Dock dock) -> dock.getName()).collect(Collectors.toList()));
     }
 
     /**
